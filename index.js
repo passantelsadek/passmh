@@ -1,9 +1,10 @@
-'use strict'
+'use strict';
 
 // Imports dependencies and set up http server
-  const express = require('express'),
-  const bodyParser = require('body-parser'),
-  var app = express().use(bodyParser.json()); // creates express http server
+const
+  express = require('express'),
+  bodyParser = require('body-parser'),
+  app = express().use(bodyParser.json()); // creates express http server
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -38,7 +39,7 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
 
   // Your verify token. Should be a random string.
- // let VERIFY_TOKEN = process.env.VERIFICATION_TOKEN;
+  let VERIFY_TOKEN = "this_is_my_token"
     
   // Parse the query params
   let mode = req.query['hub.mode'];
