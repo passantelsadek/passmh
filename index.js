@@ -87,7 +87,7 @@ function processPostback(event) {
   var senderId = event.sender.id;
   var payload = event.postback.payload;
 
-  if (payload === "Greeting") {
+  
     // Get user's first name from the User Profile API
     // and include it in the greeting
     request({
@@ -109,7 +109,7 @@ function processPostback(event) {
       var message = greeting + "My name is SEARCH BOT . I can tell you various details regarding Countries, Food and Facts you would like to know. I'm now ready for your questions :p ";
       sendMessage(senderId, {text: message});
     });
-  }
+  
 }
 
 // sends message to user
