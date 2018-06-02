@@ -14,11 +14,5 @@
     "express": "^4.16.3",
     "request": "",
     "googleapis": "^30.0.0",
-    "setting_type":"call_to_actions",
-    "call_to_actions":[
-    {
-      "payload":"Greeting"
-    }
-    ]
   }
 }
