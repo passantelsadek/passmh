@@ -19,17 +19,17 @@ app.post('/webhook', (req, res) => {
 
     // Iterates over each entry - there may be multiple if batched
     body.entry.forEach(function(entry) {
-
-      // Gets the message. entry.messaging is an array, but 
-      // will only ever contain one message, so we get index 0
-      let webhook_event = entry.messaging[0];
+       let webhook_event = entry.messaging[0];
       console.log("GOT: " + webhook_event.message.text);
-       
-      // Iterate over each messaging event
-      entry.messaging.forEach(function(event) {
+      
+     entry.messaging.forEach(function(event) {
         if (webhook_event.message) {
           processPostback(event);
         }
+      });
+      // Gets the message. entry.messaging is an array, but 
+      // will only ever contain one message, so we get index 0
+     
     });
 
     // Returns a '200 OK' response to all requests
@@ -40,7 +40,6 @@ app.post('/webhook', (req, res) => {
   }
 
 });
-
 // Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
 
