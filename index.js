@@ -25,9 +25,9 @@ app.post("/webhook", function (req, res) {
        
        // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
-        if (webhook_event.postback) {
+        if (event.postback) {
           processPost(event);
-        } else if (webhook_event.message) {
+        } else if (event.message) {
           processPostback(event);
         }
       });
