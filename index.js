@@ -123,7 +123,7 @@ function processPostback(event) {
      //sort: "date"
    };
    runSample(options).catch(console.error);
-          sendMessage(senderID,{text: JSON.stringify(res.data.items[0].snippet)});
+          sendMessage(senderId,{text: JSON.stringify(res.data.items[0].snippet)});
  }
 
  module.exports = {
