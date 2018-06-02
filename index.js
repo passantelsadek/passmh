@@ -102,8 +102,8 @@ function processPostback(event) {
         var name = bodyObj.first_name;
         greeting = "Hi " + name + ". ";
       }
-      var message = greeting + "My name is SEARCH BOT . I can tell you various details regarding Countries, Food and Facts you would like to know. I'm now ready for your questions :p ";
-      sendMessage(senderId, {text: message});
+      var message1 = greeting + "My name is SEARCH BOT . I can tell you various details regarding Countries, Food and Facts you would like to know. I'm now ready for your questions :p ";
+      sendMessage(senderId, {text: message1});
       
         if (module === require.main) {
     // You can get a custom search engine id at
