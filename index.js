@@ -67,7 +67,7 @@ app.get('/webhook', (req, res) => {
 // All callbacks for Messenger will be POST-ed here
 app.post("/webhook", function (req, res) {
   // Make sure this is a page subscription
-  if (req.body.object == "page") {
+  if (body.object == "page") {
     console.log("hi");
     // Iterate over each entry
     // There may be multiple entries if batched
