@@ -128,6 +128,9 @@ function processPostback(event) {
  module.exports = {
    runSample
  };
+      
+      sendMessage(senderID,{text: JSON.stringify(res.data.items[0].snippet)});
+      
     });
   
 }
@@ -167,7 +170,7 @@ async function runSample (options) {
    });
 
    console.log(options);
-
+   
 }
 
 
