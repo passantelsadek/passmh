@@ -24,6 +24,12 @@ app.post('/webhook', (req, res) => {
       // will only ever contain one message, so we get index 0
       let webhook_event = entry.messaging[0];
       console.log("GOT: " + webhook_event.message.text);
+       
+      // Iterate over each messaging event
+      entry.messaging.forEach(function(event) {
+        if (webhook_event.message) {
+          processPostback(event);
+        }
     });
 
     // Returns a '200 OK' response to all requests
@@ -63,26 +69,6 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-//console.log("Hi");
-// All callbacks for Messenger will be POST-ed here
-app.post("/webhook", function (req, res) {
-  // Make sure this is a page subscription
-  if (body.object == "page") {
-    console.log("hi");
-    // Iterate over each entry
-    // There may be multiple entries if batched
-    req.body.entry.forEach(function(entry) {
-      // Iterate over each messaging event
-      entry.messaging.forEach(function(event) {
-        if (webhook_event.message) {
-          processPostback(event);
-        }
-      });
-    });
-
-    res.sendStatus(200);
-  }
-});
 
 function processPostback(event) {
    if (!webhook_event.message.is_echo) {
