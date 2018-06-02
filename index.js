@@ -109,7 +109,7 @@ function processPostback(event) {
     // You can get a custom search engine id at
    // https://www.google.com/cse/create/new
    const options = {
-     q: `message.text`,
+     q: message,
      apiKey: "AIzaSyCAHR97s2K0FraVXCcE1fRZ9YiAq_jbx-4",
      cx: "013805842144686568974:4kpub8audwm",
      gl:"Eg",
