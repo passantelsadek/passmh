@@ -71,7 +71,7 @@ app.get('/webhook', (req, res) => {
 
 function processPostback(event) {
    if (!webhook_event.message.is_echo) {
-    var message = webhook_event.message;
+    var message = webhook_event.message.text;
     var senderId = webhook_event.sender.id;
 //  var payload = event.postback.payload;
      console.log("message recieved" + message);
