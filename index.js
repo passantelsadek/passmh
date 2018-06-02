@@ -89,6 +89,7 @@ function processPostback(event) {
     var message = webhook_event.message;
     var senderId = webhook_event.sender.id;
 //  var payload = event.postback.payload;
+     console.log("message recieved");
 
   //if (message.text) {
     //  var formattedMsg = message.text.toLowerCase().trim();
