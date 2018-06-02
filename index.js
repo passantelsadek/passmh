@@ -104,6 +104,27 @@ function processPostback(event) {
       }
       var message1 = greeting + "My name is SEARCH BOT . I can tell you various details regarding Countries, Food and Facts you would like to know. I'm now ready for your questions :p ";
       sendMessage(senderId, {text: message1});
+
+      async function runSample (options) {
+   const res = await customsearch.cse.list({
+    cx: options.cx,
+    q: options.q,
+    auth: options.apiKey,
+    //cr: options.cr,
+    gl: options.gl,
+    //sort: options.sort,
+    hl: options.hl,
+    //searchType: options.searchType
+    //excludeTerms: options.excludeTerms
+    //siteSearch: options.siteSearch,
+    //exactTerms: options.exactTerms, 
+    //relatedSite: options.relatedSite  
+   });
+
+   console.log(options);
+   sendMessage(senderId,{text: JSON.stringify(res.data.items[0].snippet)});
+}
+      
       
         if (module === require.main) {
     // You can get a custom search engine id at
@@ -123,7 +144,7 @@ function processPostback(event) {
      //sort: "date"
    };
    runSample(options).catch(console.error);
-          sendMessage(senderId,{text: JSON.stringify(res.data.items[0].snippet)});
+          
  }
 
  module.exports = {
@@ -151,25 +172,7 @@ function sendMessage(recipientId, message) {
   });
 }
 
-async function runSample (options) {
-   const res = await customsearch.cse.list({
-    cx: options.cx,
-    q: options.q,
-    auth: options.apiKey,
-    //cr: options.cr,
-    gl: options.gl,
-    //sort: options.sort,
-    hl: options.hl,
-    //searchType: options.searchType
-    //excludeTerms: options.excludeTerms
-    //siteSearch: options.siteSearch,
-    //exactTerms: options.exactTerms, 
-    //relatedSite: options.relatedSite  
-   });
 
-   console.log(options);
-   
-}
 
 
 
