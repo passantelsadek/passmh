@@ -35,7 +35,7 @@ app.post("/webhook", function (req, res) {
         if (event.postback) {
           processPost(event);
         } else if (event.message) {
-          processPostback(event);
+          processReply(event);
         }
       });
     });
@@ -72,18 +72,11 @@ app.get('/webhook', (req, res) => {
     }
   }
 });
-
-
-
 function processPostback(event) {
-   if (!event.message.is_echo) {
-    var message = event.message.text;
-    var senderId = event.sender.id;
-//  var payload = event.postback.payload;
-     console.log("message recieved" + message);
+  var senderId = event.sender.id;
+  var payload = event.postback.payload;
 
-  //if (message.text) {
-    //  var formattedMsg = message.text.toLowerCase().trim();
+  if (payload === "Greeting") {
     // Get user's first name from the User Profile API
     // and include it in the greeting
     request({
@@ -99,11 +92,28 @@ function processPostback(event) {
         console.log("Error getting user's name: " +  error);
       } else {
         var bodyObj = JSON.parse(body);
-        var name = bodyObj.first_name;
+        name = bodyObj.first_name;
         greeting = "Hi " + name + ". ";
       }
-      var message1 = greeting + "My name is SEARCH BOT . I can tell you various details regarding Countries, Food and Facts you would like to know. I'm now ready for your questions :p ";
-      sendMessage(senderId, {text: message1});
+      var message = greeting + "My name is SP Movie Bot. I can tell you various details regarding movies. What movie would you like to know about?";
+      sendMessage(senderId, {text: message});
+    });
+  }
+}
+
+
+
+function processReply(event) {
+   if (!event.message.is_echo) {
+    var message = event.message.text;
+    var senderId = event.sender.id;
+//  var payload = event.postback.payload;
+     console.log("message recieved" + message);
+
+  //if (message.text) {
+    //  var formattedMsg = message.text.toLowerCase().trim();
+    // Get user's first name from the User Profile API
+    // and include it in the greeting
 
       async function runSample (options) {
    const res = await customsearch.cse.list({
