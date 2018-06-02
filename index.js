@@ -160,7 +160,6 @@ function processReply(event) {
  module.exports = {
    runSample
  };
-    });
   
 }
 }
