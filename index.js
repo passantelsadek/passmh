@@ -73,7 +73,7 @@ app.post("/webhook", function (req, res) {
     req.body.entry.forEach(function(entry) {
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
-        if (event.message) {
+        if (webhook_event.message) {
           processPostback(event);
           console.log("hi");
         }
@@ -85,9 +85,9 @@ app.post("/webhook", function (req, res) {
 });
 
 function processPostback(event) {
-   if (!event.message.is_echo) {
-    var message = event.message;
-    var senderId = event.sender.id;
+   if (!webhook_event.message.is_echo) {
+    var message = webhook_event.message;
+    var senderId = webhook_event.sender.id;
 //  var payload = event.postback.payload;
 
   //if (message.text) {
