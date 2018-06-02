@@ -63,7 +63,7 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-
+//console.log("Hi");
 // All callbacks for Messenger will be POST-ed here
 app.post("/webhook", function (req, res) {
   // Make sure this is a page subscription
@@ -84,10 +84,13 @@ app.post("/webhook", function (req, res) {
 });
 
 function processPostback(event) {
-  var senderId = event.sender.id;
-  var payload = event.postback.payload;
+   if (!event.message.is_echo) {
+    var message = event.message;
+    var senderId = event.sender.id;
+//  var payload = event.postback.payload;
 
-  
+  //if (message.text) {
+    //  var formattedMsg = message.text.toLowerCase().trim();
     // Get user's first name from the User Profile API
     // and include it in the greeting
     request({
@@ -110,6 +113,7 @@ function processPostback(event) {
       sendMessage(senderId, {text: message});
     });
   
+}
 }
 
 // sends message to user
