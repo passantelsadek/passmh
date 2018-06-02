@@ -5,6 +5,8 @@ const
   express = require('express'),
   bodyParser = require('body-parser'),
   request = require('request'),
+  {google} = require('googleapis'),
+  customsearch = google.customsearch('v1'),
   app = express().use(bodyParser.json());
 
    // creates express http server
@@ -102,6 +104,30 @@ function processPostback(event) {
       }
       var message = greeting + "My name is SEARCH BOT . I can tell you various details regarding Countries, Food and Facts you would like to know. I'm now ready for your questions :p ";
       sendMessage(senderId, {text: message});
+      
+        if (module === require.main) {
+    // You can get a custom search engine id at
+   // https://www.google.com/cse/create/new
+   const options = {
+     q: message.text,
+     apiKey: "AIzaSyCAHR97s2K0FraVXCcE1fRZ9YiAq_jbx-4",
+     cx: "013805842144686568974:4kpub8audwm",
+     gl:"Eg",
+     //cr: "countryEG",
+     hl: "lang_en",
+     //searchType: "image"
+     //excludeTerms: "google",
+    //siteSearch: "https://met.guc.edu.eg",
+    // exactTerms:`${text}`, 
+     //relatedSite:"https://www.facebook.com/" ,
+     //sort: "date"
+   };
+   runSample(options).catch(console.error);
+ }
+
+ module.exports = {
+   runSample
+ };
     });
   
 }
@@ -123,3 +149,26 @@ function sendMessage(recipientId, message) {
     }
   });
 }
+
+async function runSample (options) {
+   const res = await customsearch.cse.list({
+    cx: options.cx,
+    q: options.q,
+    auth: options.apiKey,
+    //cr: options.cr,
+    gl: options.gl,
+    //sort: options.sort,
+    hl: options.hl,
+    //searchType: options.searchType
+    //excludeTerms: options.excludeTerms
+    //siteSearch: options.siteSearch,
+    //exactTerms: options.exactTerms, 
+    //relatedSite: options.relatedSite  
+   });
+
+   console.log(options);
+
+
+
+
+
