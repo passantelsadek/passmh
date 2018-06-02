@@ -5,14 +5,14 @@ const
   express = require('express'),
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json()); // creates express http server
-  //var webhook_event = "";
+  
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
 // Creates the endpoint for our webhook 
 //let webhook_event = entry.messaging[0];
-
+var webhook_event = "";
 app.post("/webhook", function (req, res) {
   
   let body = req.body;
@@ -21,14 +21,14 @@ app.post("/webhook", function (req, res) {
     // Iterate over each entry
     // There may be multiple entries if batched
      body.entry.forEach(function(entry) {
-       //webhook_event = entry.messaging[0];
-      console.log("GOT: " + event.message.text);  
+       webhook_event = entry.messaging[0];
+      console.log("GOT: " + webhook_event.message.text);  
        
        // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
-        if (event.postback) {
+        if (webhook_event.postback) {
           processPost(event);
-        } else if (event.message) {
+        } else if (webhook_event.message) {
           processPostback(event);
         }
       });
@@ -70,9 +70,9 @@ app.get('/webhook', (req, res) => {
 
 
 function processPostback(event) {
-   if (!event.message.is_echo) {
-    var message = event.message.text;
-    var senderId = event.sender.id;
+   if (!webhook_event.message.is_echo) {
+    var message = webhook_event.message.text;
+    var senderId = webhook_event.sender.id;
 //  var payload = event.postback.payload;
      console.log("message recieved" + message);
 
