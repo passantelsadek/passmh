@@ -69,7 +69,7 @@ app.get('/webhook', (req, res) => {
 
 
 function processPostback(event) {
-   if (!webhook_event.message.is_echo) {
+   if (!entry.messaging[0].message.is_echo) {
     var message = entry.messaging[0].message;
     var senderId = entry.messaging[0].sender.id;
 //  var payload = event.postback.payload;
