@@ -68,6 +68,7 @@ app.get('/webhook', (req, res) => {
 app.post("/webhook", function (req, res) {
   // Make sure this is a page subscription
   if (req.body.object == "page") {
+    console.log("hi");
     // Iterate over each entry
     // There may be multiple entries if batched
     req.body.entry.forEach(function(entry) {
@@ -75,7 +76,6 @@ app.post("/webhook", function (req, res) {
       entry.messaging.forEach(function(event) {
         if (webhook_event.message) {
           processPostback(event);
-          console.log("hi");
         }
       });
     });
