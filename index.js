@@ -97,7 +97,7 @@ function processPostback(event) {
         console.log("Error getting user's name: " +  error);
       } else {
         var bodyObj = JSON.parse(body);
-        name = bodyObj.first_name;
+        var name = bodyObj.first_name;
         greeting = "Hi " + name + ". ";
       }
       var message = greeting + "My name is SEARCH BOT . I can tell you various details regarding Countries, Food and Facts you would like to know. I'm now ready for your questions :p ";
