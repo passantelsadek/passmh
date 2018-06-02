@@ -9,6 +9,14 @@ const
   customsearch = google.customsearch('v1'),
   app = express().use(bodyParser.json());
 
+
+
+  app.get('/setup',function(req,res){
+
+    setupGetStartedButton(res);
+});
+
+
    // creates express http server
  //var app = express();
  //app.use(bodyParser.urlencoded({extended: false}));
@@ -72,6 +80,34 @@ app.get('/webhook', (req, res) => {
     }
   }
 });
+
+function setupGetStartedButton(res){
+        var messageData = {
+                "get_started":[
+                {
+                    "payload":"Greeting"
+                    }
+                ]
+        };
+
+        // Start the request
+        request({
+            url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token='+ process.env.PAGE_ACCESS_TOKEN,
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            form: messageData
+        },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                // Print out the response body
+                res.send(body);
+
+            } else { 
+                // TODO: Handle errors
+       }
+        });
+    }
+
 function processPostback(event) {
   var senderId = event.sender.id;
   var payload = event.postback.payload;
