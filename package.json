@@ -13,15 +13,13 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "request": "",
-    "googleapis": "^30.0.0"
-  }
-{
-  "setting_type":"call_to_actions",
-  "thread_state":"new_thread",
-  "call_to_actions":[
+    "googleapis": "^30.0.0",
+    "setting_type":"call_to_actions",
+    "thread_state":"new_thread",
+    "call_to_actions":[
     {
       "payload":"Greeting"
     }
-  ]
-}
+    ]
+  }
 }
