@@ -12,7 +12,6 @@ app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
 // Creates the endpoint for our webhook 
 //let webhook_event = entry.messaging[0];
-var webhook_event = "";
 app.post("/webhook", function (req, res) {
   
   let body = req.body;
@@ -21,7 +20,7 @@ app.post("/webhook", function (req, res) {
     // Iterate over each entry
     // There may be multiple entries if batched
      body.entry.forEach(function(entry) {
-       webhook_event = entry.messaging[0];
+      let webhook_event = entry.messaging[0];
       console.log("GOT: " + webhook_event.message.text);  
        
        // Iterate over each messaging event
