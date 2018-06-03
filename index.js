@@ -7,6 +7,7 @@ const
   request = require('request'),
   {google} = require('googleapis'),
   customsearch = google.customsearch('v1'),
+  geolocation = require('geolocation'),
   app = express().use(bodyParser.json());
 
 
@@ -135,7 +136,12 @@ function processReply(event) {
    });
 
    console.log(options);
+   geolocation.getCurrentPosition(function (err, position) {
+  if (err) throw err
+  console.log(position)
+})
    sendMessage(senderId,{text: JSON.stringify(res.data.items[0].snippet)});
+   sendMessage(senderId,{text: position});
 }
       
       
