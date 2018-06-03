@@ -93,6 +93,7 @@ function setupGetStartedButton(res){
                  'payload': 'This is the value you get back'
              }
         ]
+        }
         };
 
         // Start the request
