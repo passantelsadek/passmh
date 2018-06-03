@@ -83,11 +83,16 @@ app.get('/webhook', (req, res) => {
 
 function setupGetStartedButton(res){
         var messageData = {
-                "get_started":[
-                {
-                    "payload":"Greeting"
-                    }
-                ]
+                'payload': {
+        'template_type': 'button',
+        'text': 'This is the description',
+        'buttons': [
+             {
+                 'type': 'postback',
+                 'title': 'This is the visible text',
+                 'payload': 'This is the value you get back'
+             }
+        ]
         };
 
         // Start the request
