@@ -36,7 +36,7 @@ app.post("/webhook", function (req, res) {
         if (event.message.text === "Hi") {
           HiMessage(event);
         } else {
-          processPostback(event);
+          processReply(event);
         }
       });
     });
