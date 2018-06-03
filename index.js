@@ -34,7 +34,7 @@ app.post("/webhook", function (req, res) {
        // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
         if (event.message.text === "Hi") {
-          HiMessage(event);
+          processPostback(event);
         } else {
           processReply(event);
         }
@@ -92,12 +92,11 @@ app.get('/webhook', (req, res) => {
        }
         });
     }
-
-function HiMessage(event) {
+function processPostback(event) {
   var senderId = event.sender.id;
- // var payload = event.postback.payload;
+  //var payload = event.postback.payload;
 
- // if ( === "Greeting") {
+  //if (payload === "Greeting") {
     // Get user's first name from the User Profile API
     // and include it in the greeting
     request({
@@ -116,7 +115,7 @@ function HiMessage(event) {
         var name = bodyObj.first_name;
         greeting = "Hi " + name + ". ";
       }
-      var message = greeting + "My name is TestBot. I am a web searcher. What would you like to know today? :D";
+      var message = greeting + "My name is TestBot. I can tell you various info and facts. What do you want to ask me today?:D";
       sendMessage(senderId, {text: message});
     });
   }
