@@ -85,7 +85,7 @@ function setupGetStartedButton(res){
         var messageData = {
                 "get_started":[
                 {
-                    "payload":"USER_DEFINED_PAYLOAD"
+                    "payload":"Greeting"
                     }
                 ]
         };
