@@ -10,13 +10,6 @@ const
   app = express().use(bodyParser.json());
 
 
-
-  app.get('/setup',function(req,res){
-
-    setupGetStartedButton(res);
-});
-
-
    // creates express http server
  //var app = express();
  //app.use(bodyParser.urlencoded({extended: false}));
@@ -40,9 +33,9 @@ app.post("/webhook", function (req, res) {
        
        // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
-        if (event.postback) {
-          processPostback(event);
-        } else if (event.message) {
+        if (event.message.text === "Hi") {
+          HiMessage(event);
+        } else {
           processPostback(event);
         }
       });
@@ -81,20 +74,6 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-function setupGetStartedButton(res){
-        var messageData = {
-                'payload': {
-        'template_type': 'button',
-        'text': 'This is the description',
-        'buttons': [
-             {
-                 'type': 'postback',
-                 'title': 'This is the visible text',
-                 'payload': 'This is the value you get back'
-             }
-        ]
-        }
-        };
 
         // Start the request
         request({
@@ -114,11 +93,11 @@ function setupGetStartedButton(res){
         });
     }
 
-function processPostback(event) {
+function HiMessage(event) {
   var senderId = event.sender.id;
  // var payload = event.postback.payload;
 
- // if (event.postback && event.postback.payload === "Greeting") {
+ // if ( === "Greeting") {
     // Get user's first name from the User Profile API
     // and include it in the greeting
     request({
@@ -137,7 +116,7 @@ function processPostback(event) {
         var name = bodyObj.first_name;
         greeting = "Hi " + name + ". ";
       }
-      var message = greeting + "My name is SP Movie Bot. I can tell you various details regarding movies. What movie would you like to know about?";
+      var message = greeting + "My name is TestBot. I am a web searcher. What would you like to know today? :D";
       sendMessage(senderId, {text: message});
     });
   }
