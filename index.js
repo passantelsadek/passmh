@@ -6,7 +6,7 @@ const
   bodyParser = require('body-parser'),
   request = require('request'),
   {google} = require('googleapis'),
-  customsearch = google.customsearch('v1')
+  customsearch = google.customsearch('v1'),
   app = express().use(bodyParser.json());
 
 
