@@ -137,7 +137,7 @@ function processReply(event) {
    console.log(options);
 }
    sendMessage(senderId,{text: JSON.stringify(res.data.items[0].snippet)});
-
+   }
       
       
         if (module === require.main) {
@@ -166,7 +166,7 @@ function processReply(event) {
  };
   
 }
-}
+
 
 // sends message to user
 function sendMessage(recipientId, message) {
