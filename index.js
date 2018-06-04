@@ -136,7 +136,7 @@ function processReply(event) {
 
    console.log(options);
    sendMessage(senderId,{text: JSON.stringify(res.data.items[0].snippet)});
-   }
+   
    }
       
       
@@ -158,7 +158,8 @@ function processReply(event) {
      //sort: "date"
    };
    runSample(options).catch(console.error);
-          
+   
+        }
  }
 
  module.exports = {
