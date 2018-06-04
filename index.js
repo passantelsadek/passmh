@@ -163,9 +163,9 @@ function processReply(event) {
 
  module.exports = {
    runSample
- };
+ }
   
-}
+};
 
 
 // sends message to user
