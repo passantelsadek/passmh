@@ -160,11 +160,12 @@ function processReply(event) {
    runSample(options).catch(console.error);
    
         }
- }
+ 
 
  module.exports = {
    runSample
  }
+}
   
 };
 
