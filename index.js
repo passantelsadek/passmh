@@ -158,15 +158,13 @@ function processReply(event) {
      //sort: "date"
    };
    runSample(options).catch(console.error);
-   
-        }
  
    }
  module.exports = {
    runSample
  
 }
-  
+   } 
 };
 
 
