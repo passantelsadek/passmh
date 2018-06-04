@@ -33,7 +33,7 @@ app.post("/webhook", function (req, res) {
        
        // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
-        if (event.message.text == "Hello") {
+        if (event.message.text === "Hi") {
           processHi(event);
         } else {
           processReply(event);
