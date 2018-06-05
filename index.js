@@ -124,9 +124,9 @@ function processReply(event) {
     q: options.q,
     auth: options.apiKey,
     //cr: options.cr,
-    gl: options.gl,
+   // gl: options.gl,
     //sort: options.sort,
-    hl: options.hl,
+    //hl: options.hl,
     //searchType: options.searchType
     //excludeTerms: options.excludeTerms
     //siteSearch: options.siteSearch,
@@ -135,7 +135,7 @@ function processReply(event) {
    });
 
    console.log(options);
-   sendMessage(senderId,{text: JSON.stringify(res.data.items[1].snippet)});
+   sendMessage(senderId,{text: JSON.stringify(res.data.items[0].snippet)});
    
    }
       
@@ -147,9 +147,9 @@ function processReply(event) {
      q: message,
      apiKey: "AIzaSyCAHR97s2K0FraVXCcE1fRZ9YiAq_jbx-4",
      cx: "013805842144686568974:4kpub8audwm",
-     gl:"Eg",
+    // gl:"Eg",
      //cr: "countryEG",
-     hl: "lang_en",
+     //hl: "lang_en",
      //searchType: "image"
      //excludeTerms: "google",
     //siteSearch: "https://met.guc.edu.eg",
