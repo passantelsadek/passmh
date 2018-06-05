@@ -135,7 +135,7 @@ function processReply(event) {
    });
 
    console.log(options);
-   sendMessage(senderId,{text: JSON.stringify(res.data.items[0].snippet)});
+   sendMessage(senderId,{text: JSON.stringify(res.data.items[1].snippet)});
    
    }
       
