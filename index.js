@@ -135,7 +135,16 @@ function processReply(event) {
    });
 
    console.log(options);
-   sendMessage(senderId,{text: JSON.stringify(res.data.items[0].snippet)});
+         if(message.includes("capital of")){
+          sendMessage(senderId,{text: JSON.stringify(res.data.items[0].snippet)});
+          sendMessage(senderId,{text: "Would you like to know any more places to visit there? :D"});
+           if(message === "yes"){
+             sendMessage(senderId,{text: "Places to visit in" + q });
+           }
+        }else
+          sendMessage(senderId,{text: JSON.stringify(res.data.items[0].snippet)});
+   
+       
    
    }
       
