@@ -97,6 +97,13 @@ function processHi(event) {
     });
   }
 
+var delay = ( function() {
+    var timer = 0;
+    return function(callback, ms) {
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
 
 
 function processReply(event) {
@@ -130,7 +137,10 @@ function processReply(event) {
    console.log(options);
         
         if(message.includes("capital of")){
+          delay(function(){
+    // do stuff
      sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
+            }, 5000 ); 
          sendQuickReply(senderId);
       } 
      else{
