@@ -219,7 +219,7 @@ function sendTextMessage(recipientId, messageText) {
       id: recipientId
     },
     message: {
-      text: result,
+      text: messageText,
       metadata: "DEVELOPER_DEFINED_METADATA"
     }
   };
