@@ -240,13 +240,18 @@ function sendTextMessage(recipientId, messageText) {
       quick_replies: [
         {
           "content_type":"text",
-          "title":"Yes",
+          "title":"yes",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
         },
         {
           "content_type":"text",
-          "title":"No",
+          "title":"no",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+        },
+        {
+          "content_type":"text",
+          "title":"Drama",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
         }
       ]
     }
