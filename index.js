@@ -128,9 +128,13 @@ function processReply(event) {
    });
 
    console.log(options);
-  // sendMessage(senderId,{text: JSON.stringify(res.data.items[0].snippet)});
+        
+        if(message.includes("capital of"){
    sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
-         sendQuickReply(senderId)
+         sendQuickReply(senderId);
+      } 
+     else
+       sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
    }
       
       
@@ -202,12 +206,12 @@ function sendTextMessage(recipientId, messageText) {
     'entities': {
       'emotion': true,
       'sentiment': true,
-      'limit': 3
+      'limit': 2
     },
     'keywords': {
       'emotion': true,
       'sentiment': true,
-      'limit': 3
+      'limit': 2
     }
   }
 }
@@ -257,6 +261,10 @@ function sendTextMessage(recipientId, messageText) {
       ]
     }
   }
+  
+  if(messageData.message.quick_replies.title == "yes"){
+     sendTextMessage(recipientId,"send places API");
+     }
 
   callSendAPI(messageData);
 };
