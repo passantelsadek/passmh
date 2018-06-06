@@ -129,7 +129,7 @@ function processReply(event) {
 
    console.log(options);
   // sendMessage(senderId,{text: JSON.stringify(res.data.items[0].snippet)});
-   sendTextMessage(senderID, JSON.stringify(res.data.items[0].snippet));
+   sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
    }
       
       
