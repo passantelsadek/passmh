@@ -283,9 +283,6 @@ function sendTextMessage(recipientId, messageText) {
 // Start server
 // Webhooks must be available via SSL with a certificate signed by a valid
 // certificate authority.
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
 
 module.exports = app;
   
