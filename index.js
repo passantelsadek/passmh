@@ -226,7 +226,7 @@ function sendTextMessage(recipientId, messageText) {
 
   callSendAPI(messageData);
   }
-}
+
 
 
   
