@@ -137,11 +137,11 @@ function processReply(event) {
    console.log(options);
         
         if(message.includes("capital of")){
-          delay(function(){
-    // do stuff
      sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
-            }, 5000 ); 
-         sendQuickReply(senderId);
+           delay(function(){
+     sendQuickReply(senderId);
+           }, 5000 ); 
+        
       } 
      else{
        sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
