@@ -202,12 +202,12 @@ function sendTextMessage(recipientId, messageText) {
     'entities': {
       'emotion': true,
       'sentiment': true,
-      'limit': 2
+      'limit': 3
     },
     'keywords': {
       'emotion': true,
       'sentiment': true,
-      'limit': 2
+      'limit': 3
     }
   }
 }
