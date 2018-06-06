@@ -212,7 +212,7 @@ function sendTextMessage(recipientId, messageText) {
 }
 
 
-    var sentmessage = JSON.stringify(response);
+    //var sentmessage = JSON.stringify(response);
     console.log(JSON.stringify(response, null, 2));
      var messageData = {
     recipient: {
