@@ -9,12 +9,6 @@ const
   customsearch = google.customsearch('v1'),
   app = express().use(bodyParser.json());
 
-
-   // creates express http server
- //var app = express();
- //app.use(bodyParser.urlencoded({extended: false}));
- //app.use(bodyParser.json());
-
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
@@ -102,7 +96,6 @@ function processHi(event) {
       sendMessage(senderId, {text: message});
     });
   }
-//}
 
 
 
@@ -135,23 +128,8 @@ function processReply(event) {
    });
 
    console.log(options);
-        
-         if(message.includes("capital of")){
-          sendMessage(senderId,{text: JSON.stringify(res.data.items[0].snippet)});
-          sendMessage(senderId,{text: "Would you like to know places to visit there? :D"});
-           if(message === "yes"){
-             sendMessage(senderId,{text: "Places to visit in" + q });
-                                }
-           else{
-            sendMessage(senderId,{text: "next question" });
-               }
-         } 
-          else{
-          sendMessage(senderId,{text: JSON.stringify(res.data.items[0].snippet)});
-              }
-         
-       
-   
+  // sendMessage(senderId,{text: JSON.stringify(res.data.items[0].snippet)});
+   sendTextMessage(senderID, JSON.stringify(res.data.items[0].snippet));
    }
       
       
@@ -183,22 +161,135 @@ function processReply(event) {
 };
 
 
-// sends message to user
-function sendMessage(recipientId, message) {
-  request({
-    url: "https://graph.facebook.com/v2.6/me/messages",
-    qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-    method: "POST",
-    json: {
-      recipient: {id: recipientId},
-      message: message,
+function sendButtonMessage(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "button",
+          text: "This is test text",
+          buttons:[{
+            type: "web_url",
+            url: "https://www.oculus.com/en-us/rift/",
+            title: "Open Web URL"
+          }, {
+            type: "postback",
+            title: "Trigger Postback",
+            payload: "DEVELOPER_DEFINED_PAYLOAD"
+          }, {
+            type: "phone_number",
+            title: "Call Phone Number",
+            payload: "+16505551234"
+          }]
+        }
+      }
     }
-  }, function(error, response, body) {
-    if (error) {
-      console.log("Error sending message: " + response.error);
+  };
+
+  callSendAPI(messageData);
+}
+
+
+function sendTextMessage(recipientId, messageText) {
+  var parameters = {
+  'text': '' + messageText,
+  'features': {
+    'entities': {
+      'emotion': true,
+      'sentiment': true,
+      'limit': 2
+    },
+    'keywords': {
+      'emotion': true,
+      'sentiment': true,
+      'limit': 2
+    }
+  }
+}
+
+
+    var sentmessage = JSON.stringify(response);
+    console.log(JSON.stringify(response, null, 2));
+     var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: result,
+      metadata: "DEVELOPER_DEFINED_METADATA"
+    }
+  };
+
+  callSendAPI(messageData);
+  }
+});
+
+
+  
+  function sendQuickReply(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Do you want to check places to visit there?",
+      quick_replies: [
+        {
+          "content_type":"text",
+          "title":"Yes",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+        },
+        {
+          "content_type":"text",
+          "title":"No",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+        }
+      ]
+    }
+  };
+
+  callSendAPI(messageData);
+}
+
+  function callSendAPI(messageData) {
+  request({
+    uri: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: { access_token: PAGE_ACCESS_TOKEN },
+    method: 'POST',
+    json: messageData
+
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var recipientId = body.recipient_id;
+      var messageId = body.message_id;
+
+      if (messageId) {
+        console.log("Successfully sent message with id %s to recipient %s",
+          messageId, recipientId);
+      } else {
+      console.log("Successfully called Send API for recipient %s",
+        recipientId);
+      }
+    } else {
+      console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
     }
   });
 }
+
+// Start server
+// Webhooks must be available via SSL with a certificate signed by a valid
+// certificate authority.
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
+
+module.exports = app;
+  
+  
 
 
 
