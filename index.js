@@ -129,13 +129,13 @@ function processReply(event) {
 
    console.log(options);
         
-        if(message.includes("capital of"){
+        if(message.includes("capital of")){
      sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
          sendQuickReply(senderId);
       } 
      else{
        sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
-   }
+     }
    }
       
       
