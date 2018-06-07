@@ -6,6 +6,8 @@ const
   bodyParser = require('body-parser'),
   request = require('request'),
   //weather = require('weather-js'),
+  FacebookGraph = require('facebookgraph'),
+  graph = new FacebookGraph(process.env.PAGE_ACCESS_TOKEN),
   {google} = require('googleapis'),
   customsearch = google.customsearch('v1'),
   app = express().use(bodyParser.json());
@@ -103,6 +105,8 @@ function processHi(event) {
       }
       var message = greeting + "My name is TestBot. I can tell you various info and facts. What do you want to ask me today?:D";
          sendTextMessage(senderId, message);
+      var pages = await graph.search({ q: 'geek', type: 'page', fields: 'name, link' })
+      sendTextMessage(senderId, pages);
       
     });
   }
