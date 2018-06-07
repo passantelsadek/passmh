@@ -5,6 +5,7 @@ const
   express = require('express'),
   bodyParser = require('body-parser'),
   request = require('request'),
+  weather = require('weather-js'),
   {google} = require('googleapis'),
   customsearch = google.customsearch('v1'),
   app = express().use(bodyParser.json());
@@ -145,8 +146,15 @@ function processReply(event) {
       } 
      else{
        sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
+       weather.find({search: 'San Francisco, CA', degreeType: 'F'}, function(err, result) {
+  if(err) console.log(err);
+ 
+  console.log(JSON.stringify(result, null, 2));
+});
      }
    }
+     
+     
       
       
         if (module === require.main) {
