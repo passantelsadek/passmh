@@ -144,7 +144,7 @@ function processReply(event) {
            delay(function(){
      sendQuickReply(senderId);
            }, 5000 );  
-          sendTextMessage(senderId, JSON.stringify(messagestr[4]));
+          sendTextMessage(senderId, messagestr[4]);
       } 
      else{
        sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
