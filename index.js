@@ -96,7 +96,7 @@ function processHi(event) {
       var message = greeting + "My name is TestBot. I can tell you various info and facts. What do you want to ask me today?:D";
       sendMessage(senderId, {text: message});
        delay(function(){
-     sendQuickReply(senderId);
+     sendQuickReply1(senderId);
            }, 5000 ); 
       
     });
