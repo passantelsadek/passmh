@@ -95,11 +95,9 @@ function processHi(event) {
       }
       var message = greeting + "My name is TestBot. I can tell you various info and facts. What do you want to ask me today?:D";
       sendMessage(senderId, {text: message});
-           delay(function(){
-     sendQuickReply1(senderId);
+       delay(function(){
+     sendQuickReply(senderId);
            }, 5000 ); 
-        
-      } 
       
     });
   }
@@ -154,6 +152,8 @@ function processReply(event) {
        sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
      }
    }
+     
+     
      if(message.includes("weather in")){
               weather.find({search: 'Cairo', degreeType: 'C'}, function(err, result) {
   if(err) console.log(err);
