@@ -5,7 +5,7 @@ const
   express = require('express'),
   bodyParser = require('body-parser'),
   request = require('request'),
-  weather = require('weather-js'),
+  //weather = require('weather-js'),
   {google} = require('googleapis'),
   customsearch = google.customsearch('v1'),
   app = express().use(bodyParser.json());
@@ -278,10 +278,6 @@ function sendQuickReply1(recipientId) {
     }
   }
   
-  if(messageData.message.quick_replies.title == "yes"){
-     sendTextMessage(recipientId,"send places API");
-     }
-
   callSendAPI(messageData);
 };
 
