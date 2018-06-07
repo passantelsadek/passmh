@@ -103,9 +103,6 @@ function processHi(event) {
       }
       var message = greeting + "My name is TestBot. I can tell you various info and facts. What do you want to ask me today?:D";
          sendTextMessage(senderId, message);
-           delay(function(){
-     sendQuickReply(senderId);
-           }, 5000 ); 
       
     });
   }
@@ -152,10 +149,6 @@ function processReply(event) {
        sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
      }
    }
-     
-
-     
-      
       
         if (module === require.main) {
     // You can get a custom search engine id at
@@ -251,58 +244,28 @@ function sendTextMessage(recipientId, messageText) {
   callSendAPI(messageData);
   }
 
-function sendQuickReply1(recipientId) {
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      text: "Tell me which of the following you want to have answers to!",
-      quick_replies: [
-        {
-          "content_type":"text",
-          "title":"General facts",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
-        },
-        {
-          "content_type":"text",
-          "title":"Weather",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
-        },
-        {
-          "content_type":"text",
-          "title":"Food Reciepes",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
-        }
-      ]
-    }
-  }
-  
-  callSendAPI(messageData);
-};
 
-  
   function sendQuickReply(recipientId) {
   var messageData = {
     recipient: {
       id: recipientId
     },
     message: {
-      text: "Do you want to check places to visit there?",
+      text: "Do you want to check the..",
       quick_replies: [
         {
           "content_type":"text",
-          "title":"yes",
+          "title":"Weather",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
         },
         {
           "content_type":"text",
-          "title":"no",
+          "title":"Hotels",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
         },
         {
           "content_type":"text",
-          "title":"Drama",
+          "title":"Nothing",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
         }
       ]
