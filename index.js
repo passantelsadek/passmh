@@ -69,6 +69,14 @@ app.get('/webhook', (req, res) => {
   }
 });
 
+var delay = ( function() {
+    var timer = 0;
+    return function(callback, ms) {
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
+
 
 function processHi(event) {
   var senderId = event.sender.id;
@@ -94,21 +102,13 @@ function processHi(event) {
         greeting = "Hi " + name + ". ";
       }
       var message = greeting + "My name is TestBot. I can tell you various info and facts. What do you want to ask me today?:D";
-        sendTextMessage(senderId, message);
-       delay(function(){
+         sendTextMessage(senderId, message);
+           delay(function(){
      sendQuickReply1(senderId);
            }, 5000 ); 
       
     });
   }
-
-var delay = ( function() {
-    var timer = 0;
-    return function(callback, ms) {
-        clearTimeout (timer);
-        timer = setTimeout(callback, ms);
-    };
-})();
 
 
 function processReply(event) {
