@@ -146,14 +146,14 @@ function processReply(event) {
       } 
      else{
        sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
-       weather.find({search: 'San Francisco, CA', degreeType: 'F'}, function(err, result) {
-  if(err) console.log(err);
- 
-  console.log(JSON.stringify(result, null, 2));
-});
      }
    }
-     
+     if(message.includes("weather in")){
+              weather.find({search: q , degreeType: 'C'}, function(err, result) {
+  if(err) console.log(err);
+    sendTextMessage(senderId, JSON.stringify(result.current[0],null,2));
+});
+     }
      
       
       
