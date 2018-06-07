@@ -103,7 +103,8 @@ function processHi(event) {
       }
       var message = greeting + "My name is TestBot. I can tell you various info and facts. What do you want to ask me today?:D";
          sendTextMessage(senderId, message);
-      
+         sendQuickReply(senderId);
+         
     });
   }
 
