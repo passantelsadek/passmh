@@ -7,7 +7,7 @@ const
   request = require('request'),
   //weather = require('weather-js'),
   FacebookGraph = require('facebookgraph'),
-  graph = new FacebookGraph(EAAMXQhGNBt8BAJjalwunDCOGr2RcJ5KKJcqMSwaZCFPqH3uSIGOz9li6jeUCG8Ce2EImYxCZAbO51hFAj7fOGGOzuUmWlD2UV9dNilaSyzVuiBqk7mhSwGe56XdGVJ8eYCGmHNkmKy9My94OkMwOv72ZBTHFffY4VYL5ZAhywAZDZD),
+  graph = new FacebookGraph("EAAMXQhGNBt8BAJjalwunDCOGr2RcJ5KKJcqMSwaZCFPqH3uSIGOz9li6jeUCG8Ce2EImYxCZAbO51hFAj7fOGGOzuUmWlD2UV9dNilaSyzVuiBqk7mhSwGe56XdGVJ8eYCGmHNkmKy9My94OkMwOv72ZBTHFffY4VYL5ZAhywAZDZD"),
   {google} = require('googleapis'),
   customsearch = google.customsearch('v1'),
   app = express().use(bodyParser.json());
