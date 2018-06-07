@@ -95,6 +95,12 @@ function processHi(event) {
       }
       var message = greeting + "My name is TestBot. I can tell you various info and facts. What do you want to ask me today?:D";
       sendMessage(senderId, {text: message});
+           delay(function(){
+     sendQuickReply1(senderId);
+           }, 5000 ); 
+        
+      } 
+      
     });
   }
 
@@ -251,7 +257,39 @@ function sendTextMessage(recipientId, messageText) {
   callSendAPI(messageData);
   }
 
+function sendQuickReply1(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Tell me which of the following you want to have answers to!",
+      quick_replies: [
+        {
+          "content_type":"text",
+          "title":"General facts",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+        },
+        {
+          "content_type":"text",
+          "title":"Weather",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+        },
+        {
+          "content_type":"text",
+          "title":"Food Reciepes",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+        }
+      ]
+    }
+  }
+  
+  if(messageData.message.quick_replies.title == "yes"){
+     sendTextMessage(recipientId,"send places API");
+     }
 
+  callSendAPI(messageData);
+};
 
   
   function sendQuickReply(recipientId) {
