@@ -153,13 +153,7 @@ function processReply(event) {
      }
    }
      
-     
-     if(message.includes("weather in")){
-              weather.find({search: 'Cairo', degreeType: 'C'}, function(err, result) {
-  if(err) console.log(err);
-    sendTextMessage(senderId, JSON.stringify(result.current[0],null,2));
-});
-     }
+
      
       
       
