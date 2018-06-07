@@ -7,7 +7,7 @@ const
   request = require('request'),
   //weather = require('weather-js'),
   FacebookGraph = require('facebookgraph'),
-  graph = new facebookgraph(process.env.PAGE_ACCESS_TOKEN),
+  graph = new FacebookGraph(process.env.PAGE_ACCESS_TOKEN),
   {google} = require('googleapis'),
   customsearch = google.customsearch('v1'),
   app = express().use(bodyParser.json());
