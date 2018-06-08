@@ -40,7 +40,9 @@ app.post("/webhook", function (req, res) {
       entry.messaging.forEach(function(event) {
         if (event.message.text.includes("Hi")) {
           processHi(event);
-         processChoose(event);
+         delay(function(){
+     sendQuickReply(senderId);
+           }, 5000 );  
         } else {
           processReply(event);
         }
