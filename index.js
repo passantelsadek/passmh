@@ -40,9 +40,7 @@ app.post("/webhook", function (req, res) {
       entry.messaging.forEach(function(event) {
         if (event.message.text.includes("Hi")) {
           processHi(event);
-        } else {
-          processReply(event);
-        }
+        } 
       });
     });
 
@@ -106,6 +104,7 @@ function processHi(event) {
       }
       var message = greeting + "My name is TestBot. I can tell you various info and facts. Love me today and lets get this started :D";
          sendTextMessage(senderId, message);
+         sendQuickReply1(senderId);
       
          if(message == "countries"){
         sendQuickReplyC(senderId);
