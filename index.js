@@ -247,7 +247,21 @@ function sendTextMessage(recipientId, messageText) {
     }
   }
 }
+ 
+  let apiai = apiaiApp.textRequest(text, {
+    sessionId: 'tabby_cat' // use any arbitrary id
+  });
 
+  apiai.on('response', (response) => {
+    // Got a response from api.ai. Let's POST to Facebook Messenger
+     let aiText = response.result.fulfillment.speech;
+  });
+
+  apiai.on('error', (error) => {
+    console.log(error);
+  });
+
+  apiai.end();
 
     //var sentmessage = JSON.stringify(response);
     //console.log(JSON.stringify(response, null, 2));
@@ -256,7 +270,7 @@ function sendTextMessage(recipientId, messageText) {
       id: recipientId
     },
     message: {
-      text: messageText,
+      text: aiText,
       metadata: "DEVELOPER_DEFINED_METADATA"
     }
   };
