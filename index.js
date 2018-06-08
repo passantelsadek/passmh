@@ -105,22 +105,7 @@ function processHi(event) {
         greeting = "Hi " + name + ". ";
       }
       var message = greeting + "My name is TestBot. I can tell you various info and facts. Love me today and lets get this started :D";
-      
-      sendQuickReply1(senderId); 
-      
-         if(message == "countries"){
-        sendQuickReplyC(senderId);
-      }  
-      else 
-        if(message == "nutrition"){
-        var height = "what's your height in meters?"
-        sendTextMessage(senderId,height);
-        var heightrec= event.message.text;
-        var weight = "What about your weight, Don't worry i won't be telling anyone :P"
-        sendTextMessage(senderId,weight);
-        var weightrec = event.message.text;
-        console.log(weightrec);
-      }
+      //sendTextMessage(senderId,message)
          
     });
   }
