@@ -232,21 +232,6 @@ function sendTextMessage(recipientId, messageText) {
     }
   }
 }
- 
-  let apiai = apiaiApp.textRequest(text, {
-    sessionId: 'tabby_cat' // use any arbitrary id
-  });
-
-  apiai.on('response', (response) => {
-    // Got a response from api.ai. Let's POST to Facebook Messenger
-     let aiText = response.result.fulfillment.speech;
-  });
-
-  apiai.on('error', (error) => {
-    console.log(error);
-  });
-
-  apiai.end();
 
     //var sentmessage = JSON.stringify(response);
     //console.log(JSON.stringify(response, null, 2));
@@ -262,6 +247,7 @@ function sendTextMessage(recipientId, messageText) {
 
   callSendAPI(messageData);
   }
+
 
    function sendQuickReply1(recipientId) {
   var messageData = {
