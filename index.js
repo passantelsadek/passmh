@@ -42,7 +42,7 @@ app.post("/webhook", function (req, res) {
         if (event.message.text.includes("Hi")) {
           processHi(event);
         } else
-          processReply(event);
+          reply(event);
       });
     });
 
@@ -255,7 +255,7 @@ function sendTextMessage(recipientId, messageText) {
       id: recipientId
     },
     message: {
-      text: aiText,
+      text: message,
       metadata: "DEVELOPER_DEFINED_METADATA"
     }
   };
@@ -375,6 +375,42 @@ function sendMessage(recipientId, message) {
   });
 }
 
+function reply(event) {
+  let sender = event.sender.id;
+  let text = event.message.text;
+
+  let apiai = apiaiApp.textRequest(text, {
+    sessionId: 'tabby_cat' // use any arbitrary id
+  });
+
+  apiai.on('response', (response) => {
+    // Got a response from api.ai. Let's POST to Facebook Messenger
+    let aiText = response.result.fulfillment.speech;
+    
+     request({
+      url: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: {access_token: PAGE_ACCESS_TOKEN},
+      method: 'POST',
+      json: {
+        recipient: {id: sender},
+        message: {text: aiText}
+      }
+    }, (error, response) => {
+      if (error) {
+          console.log('Error sending message: ', error);
+      } else if (response.body.error) {
+          console.log('Error: ', response.body.error);
+      }
+    });
+ });
+  });
+
+  apiai.on('error', (error) => {
+    console.log(error);
+  });
+
+  apiai.end();
+}
 
 
 // Start server
