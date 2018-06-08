@@ -403,7 +403,7 @@ function reply(event) {
       }
     });
  });
-  });
+  
 
   apiai.on('error', (error) => {
     console.log(error);
