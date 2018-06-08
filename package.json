@@ -16,6 +16,6 @@
     "googleapis": "^30.0.0",
     "geolocation": "^0.2.0",
     "weather-js": "^2.0.0",
-    "facebookgraph": "^0.4.0"
+    "nutrition": "^1.3.2"
   }
 }
