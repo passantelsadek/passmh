@@ -40,7 +40,8 @@ app.post("/webhook", function (req, res) {
       entry.messaging.forEach(function(event) {
         if (event.message.text.includes("Hi")) {
           processHi(event);
-        } 
+        } else
+          processReply(event);
       });
     });
 
