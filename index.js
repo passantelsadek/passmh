@@ -31,8 +31,8 @@ app.post("/webhook", function (req, res) {
       entry.messaging.forEach(function(event) {
         if (event.message.text.includes("Hi")) {
           processHi(event);
-      delay(function(){
-                processChoose(event);;
+          delay(function(){
+            processChoose(event);
                       }, 5000 ); 
         } else {
           processReply(event);
