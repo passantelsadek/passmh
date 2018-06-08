@@ -11,6 +11,15 @@ const
   customsearch = google.customsearch('v1'),
   app = express().use(bodyParser.json());
 
+var delay = ( function() {
+    var timer = 0;
+    return function(callback, ms) {
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
+
+
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
@@ -32,8 +41,8 @@ app.post("/webhook", function (req, res) {
         if (event.message.text.includes("Hi")) {
           processHi(event);
           delay(function(){
-            processChoose(event);
-                      }, 5000 ); 
+            processChoose(event)
+                      }, 3000 ); 
         } else {
           processReply(event);
         }
@@ -73,13 +82,6 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-var delay = ( function() {
-    var timer = 0;
-    return function(callback, ms) {
-        clearTimeout (timer);
-        timer = setTimeout(callback, ms);
-    };
-})();
 
 
 function processHi(event) {
