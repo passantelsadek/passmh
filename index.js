@@ -240,7 +240,7 @@ function sendTextMessage(recipientId, messageText) {
       id: recipientId
     },
     message: {
-      text: message,
+      text: messageData,
       metadata: "DEVELOPER_DEFINED_METADATA"
     }
   };
