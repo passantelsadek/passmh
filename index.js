@@ -105,7 +105,7 @@ function processHi(event) {
         greeting = "Hi " + name + ". ";
       }
       var message = greeting + "My name is TestBot. I can tell you various info and facts. Love me today and lets get this started :D";
-      //sendTextMessage(senderId,message)
+      sendTextMessage(senderId,message)
          
     });
   }
