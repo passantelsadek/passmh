@@ -7,6 +7,7 @@ const
   request = require('request'),
   //weather = require('weather-js'),
   {google} = require('googleapis'),
+  nutrition = require("nutrition"),
   customsearch = google.customsearch('v1'),
   app = express().use(bodyParser.json());
 
@@ -30,6 +31,7 @@ app.post("/webhook", function (req, res) {
       entry.messaging.forEach(function(event) {
         if (event.message.text.includes("Hi")) {
           processHi(event);
+          processChoose(event);
         } else {
           processReply(event);
         }
@@ -101,12 +103,35 @@ function processHi(event) {
         var name = bodyObj.first_name;
         greeting = "Hi " + name + ". ";
       }
-      var message = greeting + "My name is TestBot. I can tell you various info and facts. What do you want to ask me today?:D";
+      var message = greeting + "My name is TestBot. I can tell you various info and facts. Love me today and lets get this started :D";
          sendTextMessage(senderId, message);
-         sendQuickReply(senderId);
          
     });
   }
+function processChoose(event){
+   if (!event.message.is_echo) {
+    var message = event.message.text;
+    var senderId = event.sender.id;
+     
+      sendQuickReply1(senderId);
+     
+      if(message == "countries"){
+        sendQuickReplyC(senderId);
+      }  
+      else 
+        if(message == "nutrition"){
+        var height = "what's your height in meters?"
+        sendTextMessage(senderId,height);
+        var heightrec= event.message.text;
+        var weight = "What about your weight, Don't worry i won't be telling anyone :P"
+        sendTextMessage(senderId,weight);
+        var weightrec = event.message.text;
+        console.log(weightrec);
+      }
+        
+          
+     
+}
 
 
 function processReply(event) {
@@ -245,6 +270,41 @@ function sendTextMessage(recipientId, messageText) {
 
   callSendAPI(messageData);
   }
+
+   function sendQuickReply1(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Get to know about..",
+      quick_replies: [
+        {
+          "content_type":"text",
+          "title":"Countries",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+        },
+        {
+          "content_type":"text",
+          "title":"Nutrition",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+        },
+        {
+          "content_type":"text",
+          "title":"Others",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+        }
+      ]
+    }
+  }
+  
+  if(messageData.message.quick_replies.title == "yes"){
+     sendTextMessage(recipientId,"send places API");
+     }
+
+  callSendAPI(messageData);
+};
+
 
 
   function sendQuickReply(recipientId) {
