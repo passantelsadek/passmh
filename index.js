@@ -7,6 +7,7 @@ const
   request = require('request'),
   //weather = require('weather-js'),
   {google} = require('googleapis'),
+  apiaiApp = require('apiai')(b1e2a7640fb440529780b84b1851a1f4),
   nutrition = require("nutrition"),
   customsearch = google.customsearch('v1'),
   app = express().use(bodyParser.json());
