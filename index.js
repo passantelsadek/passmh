@@ -40,9 +40,6 @@ app.post("/webhook", function (req, res) {
       entry.messaging.forEach(function(event) {
         if (event.message.text.includes("Hi")) {
           processHi(event);
-         delay(function(){
-     sendQuickReply(senderId);
-           }, 5000 );  
         } else {
           processReply(event);
         }
@@ -109,18 +106,8 @@ function processHi(event) {
       }
       var message = greeting + "My name is TestBot. I can tell you various info and facts. Love me today and lets get this started :D";
          sendTextMessage(senderId, message);
-         
-    });
-  }
-
-function processChoose(event){
-   if (!event.message.is_echo) {
-    var message = event.message.text;
-    var senderId = event.sender.id;
-     
-      sendQuickReply1(senderId);
-     
-      if(message == "countries"){
+      
+         if(message == "countries"){
         sendQuickReplyC(senderId);
       }  
       else 
@@ -133,10 +120,10 @@ function processChoose(event){
         var weightrec = event.message.text;
         console.log(weightrec);
       }
-        
-   }   
-     
-}
+         
+    });
+  }
+
 
 
 function processReply(event) {
