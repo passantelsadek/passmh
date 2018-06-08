@@ -104,7 +104,9 @@ function processHi(event) {
       }
       var message = greeting + "My name is TestBot. I can tell you various info and facts. Love me today and lets get this started :D";
          sendTextMessage(senderId, message);
-         sendQuickReply1(senderId);
+              delay(function(){
+     sendQuickReply1(senderId);
+           }, 5000 ); 
       
          if(message == "countries"){
         sendQuickReplyC(senderId);
