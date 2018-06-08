@@ -108,6 +108,7 @@ function processHi(event) {
          
     });
   }
+
 function processChoose(event){
    if (!event.message.is_echo) {
     var message = event.message.text;
@@ -129,7 +130,7 @@ function processChoose(event){
         console.log(weightrec);
       }
         
-          
+   }   
      
 }
 
