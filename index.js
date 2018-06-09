@@ -405,7 +405,7 @@ app.post('/ai', (req, res) => {
   if (req.body.result.action === 'weather') {
     console.log('*** weather ***');
     let city = req.body.result.parameters['geo-city'];
-    let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID=c355d6fe8ab3abe2d69f499a6f5147f4&q='+city;
+    let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID=c355d6fe8ab3abe2d69f499a6f5147f4&q=' +city;
 
     request.get(restUrl, (err, response, body) => {
       if (!err && response.statusCode == 200) {
@@ -413,7 +413,7 @@ app.post('/ai', (req, res) => {
         console.log(json);
         let tempF = ~~(json.main.temp * 9/5 - 459.67);
         let tempC = ~~(json.main.temp - 273.15);
-        let msg = 'The current condition in ' + json.name + ' is ' + json.weather[0].description + ' and the temperature is ' + tempF + ' ℉ (' +tempC+ ' ℃).'
+        let msg = "The current condition in " + json.name + " is " + json.weather[0].description + " and the temperature is " + tempF + " ℉ (" +tempC+ " ℃)."
         return res.json({
           speech: msg,
           displayText: msg,
