@@ -419,7 +419,7 @@ function getWeather(event){
             errorType: 'I failed to look up the city name.'}});
       }})
   }
- }
+ });
           }
 
 
