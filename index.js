@@ -398,6 +398,31 @@ function reply(event) {
   apiai.end();
 }
 
+function getWeather(event){
+  app.post('/webhook', (req, res) => {
+  if (req.body.result.action === 'weather') {
+    let city = req.body.result.parameters['geo-city'];
+    let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID='+c355d6fe8ab3abe2d69f499a6f5147f4+'&q='+city;
+
+    request.get(restUrl, (err, response, body) => {
+      if (!err && response.statusCode == 200) {
+        let json = JSON.parse(body);
+        let msg = json.weather[0].description + ' and the temperature is ' + json.main.temp + ' ℉';
+        return res.json({
+          speech: msg,
+          displayText: msg,
+          source: 'weather'});
+      } else {
+        return res.status(400).json({
+          status: {
+            code: 400,
+            errorType: 'I failed to look up the city name.'}});
+      }})
+  }
+}
+
+
+
 
 // Start server
 // Webhooks must be available via SSL with a certificate signed by a valid
