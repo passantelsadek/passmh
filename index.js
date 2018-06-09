@@ -420,7 +420,7 @@ function getWeather(event){
       }})
   }
  });
-          }
+          
 
 
 
