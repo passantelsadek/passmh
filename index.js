@@ -399,10 +399,10 @@ function reply(event) {
 }
 
 function getWeather(event){
-  app.post('/webhook', (req, res) => {
+ app.post('/ai', (req, res) => {
   if (req.body.result.action === 'weather') {
     let city = req.body.result.parameters['geo-city'];
-    let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID='+c355d6fe8ab3abe2d69f499a6f5147f4+'&q='+city;
+    let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID='+WEATHER_API_KEY+'&q='+city;
 
     request.get(restUrl, (err, response, body) => {
       if (!err && response.statusCode == 200) {
@@ -419,8 +419,8 @@ function getWeather(event){
             errorType: 'I failed to look up the city name.'}});
       }})
   }
-}
-
+ }
+          }
 
 
 
