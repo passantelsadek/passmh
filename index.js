@@ -39,10 +39,7 @@ app.post("/webhook", function (req, res) {
        
        // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
-        if (event.message.text.includes("Hi")) {
-          processHi(event);
-        } else
-          reply(event);
+        processHi(event);
       });
     });
 
@@ -142,17 +139,8 @@ function processReply(event) {
 
    console.log(options);
         
-        if(message.includes("capital of")){
-        var messagestr = message.split(" ");
-     sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
-           delay(function(){
-     sendQuickReply(senderId);
-           }, 5000 );  
-          sendTextMessage(senderId, messagestr[4]);
-      } 
-     else{
        sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
-     }
+   
    }
       
         if (module === require.main) {
