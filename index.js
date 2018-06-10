@@ -39,7 +39,11 @@ app.post("/webhook", function (req, res) {
        
        // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
-       
+         if (event.message.text.includes("Hi")) {
+-          processHi(event);
+-        } else 
+-          reply(event);
+         
       });
     });
 
@@ -359,6 +363,7 @@ function reply(event) {
 
   apiai.on('response', (response) => {
     // Got a response from api.ai. Let's POST to Facebook Messenger
+    if(response.result.source === "agent"){
     let aiText = response.result.fulfillment.speech;
     
      request({
@@ -385,6 +390,7 @@ function reply(event) {
 
   apiai.end();
 }
+           }
 
 app.post('/ai', (req, res) => {
   console.log('*** Webhook for api.ai query ***');
