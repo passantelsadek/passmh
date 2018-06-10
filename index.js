@@ -419,6 +419,7 @@ app.post('/ai', (req, res) => {
           displayText: msg,
           source: 'weather'
         });
+        console.log(msg);
       } else {
         let errorMessage = 'I failed to look up the city name.';
         return res.status(400).json({
