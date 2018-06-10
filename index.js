@@ -406,6 +406,7 @@ app.post('/ai', (req, res) => {
     console.log('*** weather ***');
     let city = req.body.result.parameters['geo-city'];
     let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID=c355d6fe8ab3abe2d69f499a6f5147f4&q=' +city;
+    console.log("the url is:" + restUrl)
 
     request.get(restUrl, (err, response, body) => {
       if (!err && response.statusCode == 200) {
@@ -419,7 +420,7 @@ app.post('/ai', (req, res) => {
           displayText: msg,
           source: 'weather'
         });
-        console.log(msg);
+        
       } else {
         let errorMessage = 'I failed to look up the city name.';
         return res.status(400).json({
