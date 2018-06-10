@@ -398,7 +398,7 @@ function reply(event) {
   apiai.end();
 }
 
-app.post('/ai', (req, res) => {
+app.post('/webhook', (req, res) => {
   console.log('*** Webhook for api.ai query ***');
   console.log(req.body.result);
 
