@@ -190,15 +190,7 @@ function processReply(event) {
 } 
 }
 }
-
-
-  apiai.on('error', (error) => {
-    console.log(error);
-  });
-
-  apiai.end();
-
-} else{
+ else{
 
       async function runSample (options) {
    const res = await customsearch.cse.list({
