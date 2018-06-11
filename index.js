@@ -148,13 +148,13 @@ function processHi(event) {
 
 
 function processReply(event) {
-   //if (!event.message.is_echo) {
+   if (!event.message.is_echo) {
     var message = event.message.text;
     var senderId = event.sender.id;
 //  var payload = event.postback.payload;
      console.log("message recieved" + message);
 
-  if (message.text === "Hi") {
+  if (message === "Hi") {
     //  var formattedMsg = message.text.toLowerCase().trim();
     // Get user's first name from the User Profile API
     // and include it in the greeting
@@ -240,7 +240,7 @@ function processReply(event) {
 
 
 }
-   //} 
+   } 
 };
 
 
