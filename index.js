@@ -84,9 +84,6 @@ app.post("/webhook", function (req, res) {
 
 });
 
-      });
-    });      
-       
 
 // Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
