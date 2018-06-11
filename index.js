@@ -178,8 +178,8 @@ function processReply(event) {
           console.log('Error: ', response.body.error);
      }
     });
- });
-
+   
+ 
   apiai.on('error', (error) => {
     console.log(error);
   });
@@ -187,6 +187,7 @@ function processReply(event) {
   apiai.end();
 
 }
+    }); 
  else{
 
       async function runSample (options) {
