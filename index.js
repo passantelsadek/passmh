@@ -81,57 +81,7 @@ app.post("/webhook", function (req, res) {
       }
     })
   } 
-            if(req.body.metadata === {}){
-      async function runSample (options) {
-   const res = await customsearch.cse.list({
-    cx: options.cx,
-    q: options.q,
-    auth: options.apiKey,
-    //cr: options.cr,
-   // gl: options.gl,
-    //sort: options.sort,
-    //hl: options.hl,
-    //searchType: options.searchType
-    //excludeTerms: options.excludeTerms
-    //siteSearch: options.siteSearch,
-    //exactTerms: options.exactTerms, 
-    //relatedSite: options.relatedSite  
-   });
-
-   console.log(options);
-        
-       sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
-   
-   }
-      
-        if (module === require.main) {
-    // You can get a custom search engine id at
-   // https://www.google.com/cse/create/new
-   const options = {
-     q: req.body.result.resolvedQuery,
-     apiKey: "AIzaSyCAHR97s2K0FraVXCcE1fRZ9YiAq_jbx-4",
-     cx: "013805842144686568974:4kpub8audwm",
-    // gl:"Eg",
-     //cr: "countryEG",
-     //hl: "lang_en",
-     //searchType: "image"
-     //excludeTerms: "google",
-    //siteSearch: "https://met.guc.edu.eg",
-    // exactTerms:`${text}`, 
-     //relatedSite:"https://www.facebook.com/" ,
-     //sort: "date"
-   };
-   runSample(options).catch(console.error);
- 
-   }
- module.exports = {
-   runSample
- }
-    
-    
-    
-  }
-
+           
 });
 
 
