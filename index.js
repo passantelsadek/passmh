@@ -154,7 +154,7 @@ function processReply(event) {
 //  var payload = event.postback.payload;
      console.log("message recieved" + message);
 
-  //if (message.text) {
+  if (message.text === "whats the capital of brazil?") {
     //  var formattedMsg = message.text.toLowerCase().trim();
     // Get user's first name from the User Profile API
     // and include it in the greeting
@@ -204,6 +204,40 @@ function processReply(event) {
  module.exports = {
    runSample
  
+} else {
+ let apiai = apiaiApp.textRequest(text, {
+    sessionId: 'tabby_cat' // use any arbitrary id
+  });
+
+  apiai.on('response', (response) => {
+    // Got a response from api.ai. Let's POST to Facebook Messenger
+    let aiText = response.result.fulfillment.speech;
+    
+     request({
+      url: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+      method: 'POST',
+      json: {
+        recipient: {id: sender},
+        message: {text: aiText}
+      }
+    }, (error, response) => {
+      if (error) {
+          console.log('Error sending message: ', error);
+      } else if (response.body.error) {
+          console.log('Error: ', response.body.error);
+      }
+    });
+ });
+  
+
+  apiai.on('error', (error) => {
+    console.log(error);
+  });
+
+  apiai.end();
+
+
 }
    } 
 };
