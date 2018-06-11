@@ -204,6 +204,10 @@ function processReply(event) {
         
        sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
        sendTextMessage(senderId, JSON.stringify(res.data.items[0].link));
+       delay(function(){
+        sendTextMessage(senderId, "What would you like to know more?");
+}, 5000 );
+       
    }
       
         if (module === require.main) {
@@ -466,6 +470,14 @@ function isEmpty(obj) {
 
     return true;
 }
+
+var delay = ( function() {
+    var timer = 0;
+    return function(callback, ms) {
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
 // Start server
 // Webhooks must be available via SSL with a certificate signed by a valid
 // certificate authority.
