@@ -163,7 +163,7 @@ function processReply(event) {
     let aiText = response.result.fulfillment.speech;
     console.log("HEEELLOOOO" + JSON.stringify(response.result.metadata));
     
-    if (!JSON.stringify(response.result.metadata) == {}) {
+    if (response.result.metadata.length == 0) {
      request({
       url: 'https://graph.facebook.com/v2.6/me/messages',
       qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
