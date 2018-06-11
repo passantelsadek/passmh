@@ -154,7 +154,7 @@ function processReply(event) {
 //  var payload = event.postback.payload;
      console.log("message recieved" + message);
 
-  if (message === "") {
+  if (message === "Hi") {
     console.log("ANA HENA");
  let apiai = apiaiApp.textRequest(message, {
     sessionId: 'tabby_cat' // use any arbitrary id
