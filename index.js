@@ -181,7 +181,7 @@ function processReply(event) {
     });
       
 }
-    
+     sendTextMessage(senderId, "What would you like to know more?");
  else{
 
       async function runSample (options) {
