@@ -178,16 +178,9 @@ function processReply(event) {
           console.log('Error: ', response.body.error);
      }
     });
-   
- 
-  apiai.on('error', (error) => {
-    console.log(error);
-  });
-
-  apiai.end();
-
+      
 }
-    }); 
+    
  else{
 
       async function runSample (options) {
@@ -236,6 +229,14 @@ function processReply(event) {
    runSample
  }
  } 
+   }); 
+ 
+  apiai.on('error', (error) => {
+    console.log(error);
+  });
+
+  apiai.end();
+
 }
 }
 
