@@ -179,8 +179,6 @@ function processReply(event) {
           console.log('Error: ', response.body.error);
      }
     });
-     
-     sendTextMessage(senderId, "What would you like to know more?"); 
 }
  else{
 
@@ -203,7 +201,9 @@ function processReply(event) {
    console.log(options);
         
        sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
-       sendTextMessage(senderId, JSON.stringify(res.data.items[0].link));
+      delay(function(){
+        sendTextMessage(senderId, JSON.stringify(res.data.items[0].link));
+}, 4000 );
        delay(function(){
         sendTextMessage(senderId, "What would you like to know more?");
 }, 5000 );
