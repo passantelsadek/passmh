@@ -203,8 +203,8 @@ function processReply(event) {
    }
  module.exports = {
    runSample
- 
-} else {
+ }
+ }else {
  let apiai = apiaiApp.textRequest(text, {
     sessionId: 'tabby_cat' // use any arbitrary id
   });
