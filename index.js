@@ -204,8 +204,8 @@ function processReply(event) {
  module.exports = {
    runSample
  }
- }else {
- let apiai = apiaiApp.textRequest(text, {
+ } else {
+ let apiai = apiaiApp.textRequest(message, {
     sessionId: 'tabby_cat' // use any arbitrary id
   });
 
@@ -218,7 +218,7 @@ function processReply(event) {
       qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
       method: 'POST',
       json: {
-        recipient: {id: sender},
+        recipient: {id: senderId},
         message: {text: aiText}
       }
     }, (error, response) => {
