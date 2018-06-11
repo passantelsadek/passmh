@@ -42,7 +42,7 @@ app.post("/webhook", function (req, res) {
          if (event.message.text.includes("Hi")) {
           processHi(event);
         } else 
-          weatherreply(event);
+          weatherreply();
       });
     });
 
