@@ -155,9 +155,40 @@ function processReply(event) {
      console.log("message recieved" + message);
 
   if (message === "Hi") {
-    //  var formattedMsg = message.text.toLowerCase().trim();
-    // Get user's first name from the User Profile API
-    // and include it in the greeting
+  console.log("ANA HENA");
+ let apiai = apiaiApp.textRequest(message, {
+    sessionId: 'tabby_cat' // use any arbitrary id
+  });
+
+  apiai.on('response', (response) => {
+    // Got a response from api.ai. Let's POST to Facebook Messenger
+    let aiText = response.result.fulfillment.speech;
+    
+     request({
+      url: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+      method: 'POST',
+      json: {
+        recipient: {id: senderId},
+        message: {text: aiText}
+      }
+    }, (error, response) => {
+      if (error) {
+          console.log('Error sending message: ', error);
+      } else if (response.body.error) {
+          console.log('Error: ', response.body.error);
+      }
+    });
+ });
+  
+
+  apiai.on('error', (error) => {
+    console.log(error);
+  });
+
+  apiai.end();
+
+} else{
 
       async function runSample (options) {
    const res = await customsearch.cse.list({
@@ -205,41 +236,6 @@ function processReply(event) {
    runSample
  }
  } 
-  else{  
-  console.log("ANA HENA");
- let apiai = apiaiApp.textRequest(message, {
-    sessionId: 'tabby_cat' // use any arbitrary id
-  });
-
-  apiai.on('response', (response) => {
-    // Got a response from api.ai. Let's POST to Facebook Messenger
-    let aiText = response.result.fulfillment.speech;
-    
-     request({
-      url: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-      method: 'POST',
-      json: {
-        recipient: {id: senderId},
-        message: {text: aiText}
-      }
-    }, (error, response) => {
-      if (error) {
-          console.log('Error sending message: ', error);
-      } else if (response.body.error) {
-          console.log('Error: ', response.body.error);
-      }
-    });
- });
-  
-
-  apiai.on('error', (error) => {
-    console.log(error);
-  });
-
-  apiai.end();
-
-}
 }
 }
 
