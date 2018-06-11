@@ -240,11 +240,9 @@ function processReply(event) {
 
   apiai.end();
 
+}
+}
 
-}
-    
-}
-}
 
 function sendButtonMessage(recipientId) {
   var messageData = {
