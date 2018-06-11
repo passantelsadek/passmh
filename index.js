@@ -148,7 +148,7 @@ function processHi(event) {
 
 
 function processReply(event) {
-   if (!event.message.is_echo) {
+   //if (!event.message.is_echo) {
     var message = event.message.text;
     var senderId = event.sender.id;
 //  var payload = event.postback.payload;
@@ -239,7 +239,7 @@ function processReply(event) {
 
 
 }
-   } 
+   //} 
 };
 
 
