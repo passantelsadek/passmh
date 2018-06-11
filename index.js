@@ -163,7 +163,7 @@ function processReply(event) {
     let aiText = response.result.fulfillment.speech;
     console.log("HEEELLOOOO" + JSON.stringify(response.result.metadata));
     
-    if (response.result.metadata.length) {
+    if (!isEmpty(response.result.metadata)) {
      request({
       url: 'https://graph.facebook.com/v2.6/me/messages',
       qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
@@ -458,7 +458,14 @@ function reply(event) {
            
 
 
+function isEmpty(obj) {
+    for(var prop in obj) {
+        if(obj.hasOwnProperty(prop))
+            return false;
+    }
 
+    return true;
+}
 // Start server
 // Webhooks must be available via SSL with a certificate signed by a valid
 // certificate authority.
