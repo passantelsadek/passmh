@@ -179,9 +179,9 @@ function processReply(event) {
           console.log('Error: ', response.body.error);
      }
     });
-      
+     
+     sendTextMessage(senderId, "What would you like to know more?"); 
 }
-     sendTextMessage(senderId, "What would you like to know more?");
  else{
 
       async function runSample (options) {
