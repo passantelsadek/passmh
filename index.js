@@ -42,7 +42,7 @@ app.post("/webhook", function (req, res) {
          if (event.message.text.includes("Hi")) {
           processHi(event);
         } else 
-          reply(event);
+          weatherreply(event);
       });
     });
 
@@ -389,7 +389,7 @@ function reply(event) {
   apiai.end();
 }
            
-
+function weatherreply(){
 app.post('/ai', (req, res) => {
   console.log('*** Webhook for api.ai query ***');
   console.log(req.body.result);
@@ -426,6 +426,7 @@ app.post('/ai', (req, res) => {
   }
 
 });
+}
 
 
 // Start server
