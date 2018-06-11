@@ -205,6 +205,7 @@ function processReply(event) {
    runSample
  }
  } else {
+   console.log("ANA HENA");
  let apiai = apiaiApp.textRequest(message, {
     sessionId: 'tabby_cat' // use any arbitrary id
   });
