@@ -39,9 +39,12 @@ app.post("/webhook", function (req, res) {
        
        // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
-         if (event.message.text.includes("Hi")) {
-          processHi(event);
-        } else 
+        processReply(event);
+        } 
+    res.sendStatus(200);
+  }
+});
+
           app.post('/ai', (req, res) => {
   console.log('*** Webhook for api.ai query ***');
   console.log(req.body.result);
@@ -80,12 +83,8 @@ app.post("/webhook", function (req, res) {
 });
 
       });
-    });
-
-    res.sendStatus(200);
-  }
-});
-
+    });      
+       
 
 // Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
