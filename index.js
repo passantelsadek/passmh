@@ -40,7 +40,6 @@ app.post("/webhook", function (req, res) {
        // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
         processReply(event);
-        } 
     res.sendStatus(200);
   }
 });
