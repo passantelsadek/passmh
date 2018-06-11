@@ -25,7 +25,7 @@ var delay = ( function() {
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
 // Creates the endpoint for our webhook 
-//let webhook_event = entry.messaging[0];
+
 app.post("/webhook", function (req, res) {
   
   let body = req.body;
@@ -42,7 +42,43 @@ app.post("/webhook", function (req, res) {
          if (event.message.text.includes("Hi")) {
           processHi(event);
         } else 
-          weatherreply();
+          app.post('/ai', (req, res) => {
+  console.log('*** Webhook for api.ai query ***');
+  console.log(req.body.result);
+
+  if (req.body.result.action === 'weather') {
+    console.log('*** weather ***');
+    let city = req.body.result.parameters['geo-city'];
+    let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID=c355d6fe8ab3abe2d69f499a6f5147f4&q=' +city;
+    //console.log("the url is:" + restUrl)
+
+    request.get(restUrl, (err, response, body) => {
+      if (!err && response.statusCode == 200) {
+        let json = JSON.parse(body);
+        console.log(json);
+        let tempF = ~~(json.main.temp * 9/5 - 459.67);
+        let tempC = ~~(json.main.temp - 273.15);
+        let msg = "The current condition in " + json.name + " is " + json.weather[0].description + " and the temperature is " + tempF + " ℉ (" +tempC+ " ℃)."
+        return res.json({
+          speech: msg,
+          displayText: msg,
+          source: 'weather'
+        });
+        
+      } else {
+        let errorMessage = 'I failed to look up the city name.';
+        return res.status(400).json({
+          status: {
+            code: 400,
+            errorType: errorMessage
+          }
+        });
+      }
+    })
+  }
+
+});
+
       });
     });
 
@@ -78,6 +114,7 @@ app.get('/webhook', (req, res) => {
     }
   }
 });
+
 
 
 
@@ -389,44 +426,7 @@ function reply(event) {
   apiai.end();
 }
            
-function weatherreply(){
-app.post('/ai', (req, res) => {
-  console.log('*** Webhook for api.ai query ***');
-  console.log(req.body.result);
 
-  if (req.body.result.action === 'weather') {
-    console.log('*** weather ***');
-    let city = req.body.result.parameters['geo-city'];
-    let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID=c355d6fe8ab3abe2d69f499a6f5147f4&q=' +city;
-    //console.log("the url is:" + restUrl)
-
-    request.get(restUrl, (err, response, body) => {
-      if (!err && response.statusCode == 200) {
-        let json = JSON.parse(body);
-        console.log(json);
-        let tempF = ~~(json.main.temp * 9/5 - 459.67);
-        let tempC = ~~(json.main.temp - 273.15);
-        let msg = "The current condition in " + json.name + " is " + json.weather[0].description + " and the temperature is " + tempF + " ℉ (" +tempC+ " ℃)."
-        return res.json({
-          speech: msg,
-          displayText: msg,
-          source: 'weather'
-        });
-        
-      } else {
-        let errorMessage = 'I failed to look up the city name.';
-        return res.status(400).json({
-          status: {
-            code: 400,
-            errorType: errorMessage
-          }
-        });
-      }
-    })
-  }
-
-});
-}
 
 
 // Start server
