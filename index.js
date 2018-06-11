@@ -206,7 +206,8 @@ function processReply(event) {
  }
  } 
   
-}else  console.log("ANA HENA");
+}else{  
+  console.log("ANA HENA");
  let apiai = apiaiApp.textRequest(message, {
     sessionId: 'tabby_cat' // use any arbitrary id
   });
@@ -243,7 +244,7 @@ function processReply(event) {
 }
     
 }
-} 
+}
 
 function sendButtonMessage(recipientId) {
   var messageData = {
