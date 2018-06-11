@@ -178,8 +178,7 @@ function processReply(event) {
           console.log('Error: ', response.body.error);
      }
     });
- };
-  });
+ });
 
   apiai.on('error', (error) => {
     console.log(error);
