@@ -154,7 +154,7 @@ function processReply(event) {
 //  var payload = event.postback.payload;
      console.log("message recieved" + message);
 
-  if (message.text) {
+  if (message.text === "Hi") {
     //  var formattedMsg = message.text.toLowerCase().trim();
     // Get user's first name from the User Profile API
     // and include it in the greeting
