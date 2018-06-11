@@ -203,7 +203,7 @@ function processReply(event) {
    console.log(options);
         
        sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
-   
+       sendTextMessage(senderId, JSON.stringify(res.data.items[0].link));
    }
       
         if (module === require.main) {
