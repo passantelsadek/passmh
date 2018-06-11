@@ -187,9 +187,6 @@ function processReply(event) {
 
   apiai.end();
 
-} 
-}
-}
 }
  else{
 
