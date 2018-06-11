@@ -176,10 +176,21 @@ function processReply(event) {
           console.log('Error sending message: ', error);
       } else if (response.body.error) {
           console.log('Error: ', response.body.error);
-      }
+     }
     });
- });
-  
+ };
+  });
+
+  apiai.on('error', (error) => {
+    console.log(error);
+  });
+
+  apiai.end();
+
+} 
+}
+}
+
 
   apiai.on('error', (error) => {
     console.log(error);
