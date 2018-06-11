@@ -154,8 +154,6 @@ function processReply(event) {
 //  var payload = event.postback.payload;
      console.log("message recieved" + message);
 
-  if (message === "Hi") {
-  console.log("ANA HENA");
  let apiai = apiaiApp.textRequest(message, {
     sessionId: 'tabby_cat' // use any arbitrary id
   });
@@ -164,6 +162,7 @@ function processReply(event) {
     // Got a response from api.ai. Let's POST to Facebook Messenger
     let aiText = response.result.fulfillment.speech;
     
+    if (!response.result.metadata == {}) {
      request({
       url: 'https://graph.facebook.com/v2.6/me/messages',
       qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
