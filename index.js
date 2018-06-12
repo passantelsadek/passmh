@@ -201,9 +201,8 @@ function processReply(event) {
    console.log(options);
         
        sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
-      delay(function(){
+      
         sendTextMessage(senderId, JSON.stringify(res.data.items[0].link));
-}, 4000 );
       
        delay(function(){
         sendTextMessage(senderId, "What would you like to know more?");
