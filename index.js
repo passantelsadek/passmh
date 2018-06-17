@@ -5,7 +5,7 @@ const
   express = require('express'),
   bodyParser = require('body-parser'),
   request = require('request'),
-  GooglePlaces = require('google-places'),
+  //GooglePlaces = require('google-places'),
   {google} = require('googleapis'),
   apiaiApp = require('apiai')('b1e2a7640fb440529780b84b1851a1f4'),
   nutrition = require("nutrition"),
