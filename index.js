@@ -5,7 +5,7 @@ const
   express = require('express'),
   bodyParser = require('body-parser'),
   request = require('request'),
-  //weather = require('weather-js'),
+  GooglePlaces = require('google-places'),
   {google} = require('googleapis'),
   apiaiApp = require('apiai')('b1e2a7640fb440529780b84b1851a1f4'),
   nutrition = require("nutrition"),
@@ -478,6 +478,9 @@ var delay = ( function() {
         timer = setTimeout(callback, ms);
     };
 })();
+
+
+
 // Start server
 // Webhooks must be available via SSL with a certificate signed by a valid
 // certificate authority.
