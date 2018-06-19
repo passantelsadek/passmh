@@ -200,9 +200,9 @@ function processReply(event) {
 
    console.log(options);
         
-       sendTextMessage(senderId, JSON.stringify(res.data.items[0].snippet));
+       sendTextMessage(senderId, JSON.stringify(res.data.items[1].snippet));
       
-        sendTextMessage(senderId, JSON.stringify(res.data.items[0].link));
+        sendTextMessage(senderId, JSON.stringify(res.data.items[1].link));
       
         if(response.result.resolvedQuery.includes("capital") || response.result.resolvedQuery.includes("weather") || 
            response.result.resolvedQuery.includes("country")){
