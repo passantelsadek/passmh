@@ -163,6 +163,7 @@ function processReply(event) {
     let aiText = response.result.fulfillment.speech;
     let city2 = response.result.parameters.geocity;
     console.log("HEEELLOOOO" + JSON.stringify(response.result.metadata));
+    console.log("aarrraaffff" + city2);
     
     if (!isEmpty(response.result.metadata)) {
      request({
