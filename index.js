@@ -161,7 +161,7 @@ function processReply(event) {
   apiai.on('response', (response) => {
     // Got a response from api.ai. Let's POST to Facebook Messenger
     let aiText = response.result.fulfillment.speech;
-    let city2 = response.result.parameters['geo-city'];
+    let city2 = response.result.parameters[1];
     console.log("HEEELLOOOO" + JSON.stringify(response.result.metadata));
     
     if (!isEmpty(response.result.metadata)) {
