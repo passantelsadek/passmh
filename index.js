@@ -53,7 +53,7 @@ app.post("/webhook", function (req, res) {
 
   if (req.body.result.action === 'weather') {
     console.log('** weather **');
-    let city = req.body.result.parameters['geocity'];
+    let city = req.body.result.parameters['geo-city'];
     let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID=c355d6fe8ab3abe2d69f499a6f5147f4&q=' +city;
     //console.log("the url is:" + restUrl)
 
@@ -161,9 +161,9 @@ function processReply(event) {
   apiai.on('response', (response) => {
     // Got a response from api.ai. Let's POST to Facebook Messenger
     let aiText = response.result.fulfillment.speech;
-    let city2 = response.result.parameters.geocity;
+  //  let city2 = response.result.parameters.geocity;
     console.log("HEEELLOOOO" + JSON.stringify(response.result.metadata));
-    console.log("aarrraaffff" + city2);
+    //console.log("aarrraaffff" + city2);
     
     if (!isEmpty(response.result.metadata)) {
      request({
