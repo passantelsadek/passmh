@@ -377,7 +377,7 @@ function sendTextMessage(recipientId, messageText) {
         },
         {
           "content_type":"text",
-          "title":"Nothing",
+          "title":"Others",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
         }
       ]
