@@ -204,9 +204,12 @@ function processReply(event) {
       
         sendTextMessage(senderId, JSON.stringify(res.data.items[0].link));
       
-       delay(function(){
-        sendTextMessage(senderId, "What would you like to know more?");
-}, 6000 );
+        if(response.result.resolvedQuery.includes("capital") || response.result.resolvedQuery.includes("weather") || 
+           response.result.resolvedQuery.includes("country")){
+          sendQuickReply(senderId);
+        } else {
+          sendTextMessage(senderId, "What else would you like to know?");
+        }
        
    }
       
