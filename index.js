@@ -204,12 +204,17 @@ function processReply(event) {
       
         sendTextMessage(senderId, JSON.stringify(res.data.items[1].link));
       
-        if(response.result.resolvedQuery.includes("capital") || response.result.resolvedQuery.includes("weather") || 
+        
+        delay(function(){
+         if(response.result.resolvedQuery.includes("capital") || response.result.resolvedQuery.includes("weather") || 
            response.result.resolvedQuery.includes("country")){
           sendQuickReply(senderId);
         } else {
           sendTextMessage(senderId, "What else would you like to know?");
         }
+}, 6000 );
+        
+       
        
    }
       
