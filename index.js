@@ -216,13 +216,6 @@ function processReply(event) {
         }
 }, 6000 );
         
-         delay(function(){
-         if(res.data.items[1].snippet.includes(city2) ){
-          sendQuickReply(senderId);
-        } else {
-          sendTextMessage(senderId, "What else would you like to know?");
-        }
-}, 6000 );
        
        
    }
