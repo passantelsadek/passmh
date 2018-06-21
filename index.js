@@ -47,7 +47,7 @@ app.post("/webhook", function (req, res) {
   }
 });
 
-          app.post('/ai', (req, res) => {
+         app.post('/ai', (req, res) => {
   console.log('*** Webhook for api.ai query ***');
   console.log(req.body.result);
 
@@ -80,11 +80,36 @@ app.post("/webhook", function (req, res) {
         });
       }
     })
+  } else if(req.body.result.action === 'place'){
+    console.log('** PLACE **');
+    //let city = req.body.result.parameters['geo-city'];
+    let restUrl = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Pyramids%20of%20Giza%20Egypt&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM";
+     request.get(restUrl, (err, response, body) => {
+      if (!err && response.statusCode == 200) {
+        let json = JSON.parse(body);
+        console.log(json);
+        //let tempF = ~~(json.main.temp * 9/5 - 459.67);
+        //let tempC = ~~(json.main.temp - 273.15);
+        let msg = "The place is" + json.name + " and it is located in " + json.formatted_address + " and it's currently " + json.opening_hours + "and the it's rating is" + json.rating;
+        return res.json({
+          speech: msg,
+          displayText: msg,
+          source: 'place'
+        });
+        
+      } else {
+        let errorMessage = 'I failed to look up the city name.';
+        return res.status(400).json({
+          status: {
+            code: 400,
+            errorType: errorMessage
+          }
+        });
+      }
+    })
   } 
            
 });
-
-
 // Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
 
@@ -209,8 +234,7 @@ function processReply(event) {
         delay(function(){
          if(response.result.resolvedQuery.includes("capital") || response.result.resolvedQuery.includes("weather") || 
            response.result.resolvedQuery.includes("country")){
-          //sendQuickReply(senderId);
-           searchByName("pyramids of giza egypt");
+          sendQuickReply(senderId);
         } else {
           sendTextMessage(senderId, "What else would you like to know?");
         }
