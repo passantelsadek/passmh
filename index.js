@@ -82,15 +82,15 @@ app.post("/webhook", function (req, res) {
     })
   } else if(req.body.result.action === 'place'){
     console.log('** PLACE **');
-    //let city = req.body.result.parameters['geo-city'];
-    let restUrl = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Pyramids%20of%20Giza%20Egypt&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM";
+    let place = req.body.result.parameters['place-attraction-gb'];
+    let restUrl = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM&input=" + place;
      request.get(restUrl, (err, response, body) => {
       if (!err && response.statusCode == 200) {
         let json = JSON.parse(body);
         console.log(json);
         //let tempF = ~~(json.main.temp * 9/5 - 459.67);
         //let tempC = ~~(json.main.temp - 273.15);
-        let msg = "The Place is " + json.candidates[0].name + " ,It's located in " + json.candidates[0].formatted_address + " ,Open now is " + json.candidates[0].opening_hours.open_now + " and the it's rating is " + json.candidates[0].rating;
+        let msg = "The Place is " + json.candidates[0].name + " ,It's located in " + json.candidates[0].formatted_address + " ,Open now is " + json.candidates[0].opening_hours.open_now + " and it's rating is " + json.candidates[0].rating;
         return res.json({
           speech: msg,
           displayText: msg,
