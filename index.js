@@ -204,8 +204,7 @@ function processReply(event) {
         
        sendTextMessage(senderId, JSON.stringify(res.data.items[1].snippet));
       
-        sendTextMessage(senderId, JSON.stringify(res.data.items[1].link));
-      
+        sendTextMessage(senderId, JSON.stringify(res.data.items[1].link));         
         
         delay(function(){
          if(response.result.resolvedQuery.includes("capital") || response.result.resolvedQuery.includes("weather") || 
@@ -216,7 +215,9 @@ function processReply(event) {
         }
 }, 6000 );
         
-       
+       if(response.result.resolvedQuery.includes("Pyramids")){
+         searchByName("The Pyramids of Gize Egypt");
+       }
        
    }
       
@@ -432,6 +433,25 @@ function sendMessage(recipientId, message) {
     }
   });
 }
+
+function SearchbyName(input) {
+    request({
+    url: "https://maps.googleapis.com/maps/api/place/findplacefromtext",
+    qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+    method: "GET",
+    json: {
+      input: input,
+      inputtype: "textquery",
+      fields: "photos,formatted_address,name,rating,opening_hours,geometry",
+      key: "AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM"
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log("Error sending message: " + response.error);
+    }
+  });
+}
+ 
 
 function reply(event) {
   let sender = event.sender.id;
