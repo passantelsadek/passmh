@@ -83,7 +83,7 @@ app.post("/webhook", function (req, res) {
   } else if(req.body.result.action === 'place'){
     console.log('** PLACE **');
     let places = req.body.result.parameters['place-attraction'];
-    let restUrl = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?&input=" +places+ "inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM";
+    let restUrl = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?&input=golden gate bridge&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM";
      request.get(restUrl, (err, response, body) => {
       if (!err && response.statusCode == 200) {
         let json = JSON.parse(body);
