@@ -63,7 +63,7 @@ app.post("/webhook", function (req, res) {
         console.log(json);
         let tempF = ~~(json.main.temp * 9/5 - 459.67);
         let tempC = ~~(json.main.temp - 273.15);
-        let msg = "The current condition in " + JSON.stringify(json.name) + " is " + json.weather[0].description + " and the temperature is " + tempF + " ℉ (" +tempC+ " ℃)."
+        let msg = "The current condition in " + json.name + " is " + json.weather[0].description + " and the temperature is " + tempF + " ℉ (" +tempC+ " ℃)."
         return res.json({
           speech: msg,
           displayText: msg,
@@ -90,7 +90,7 @@ app.post("/webhook", function (req, res) {
         console.log(json);
         //let tempF = ~~(json.main.temp * 9/5 - 459.67);
         //let tempC = ~~(json.main.temp - 273.15);
-        let msg = "The place is" + json.name + " and it is located in " + json.formatted_address + " and it's currently " + json.opening_hours + "and the it's rating is" + json.rating;
+        let msg = "The place is" + JSON.stringify(json.name) + " and it is located in " + json.formatted_address + " and it's currently " + json.opening_hours + "and the it's rating is" + json.rating;
         return res.json({
           speech: msg,
           displayText: msg,
@@ -98,7 +98,7 @@ app.post("/webhook", function (req, res) {
         });
         
       } else {
-        let errorMessage = 'I failed to look up the city name.';
+        let errorMessage = 'I failed to look up the place.';
         return res.status(400).json({
           status: {
             code: 400,
