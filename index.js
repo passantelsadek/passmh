@@ -90,7 +90,7 @@ app.post("/webhook", function (req, res) {
         console.log(json);
         //let tempF = ~~(json.main.temp * 9/5 - 459.67);
         //let tempC = ~~(json.main.temp - 273.15);
-        let msg = "The place is " + json.candidates[0] + " ,it is located in " + json.formatted_address + " and it's currently " + json.opening_hours + "and the it's rating is" + json.rating;
+        let msg = "The place is " + json.candidates[0].formatted_address + " ,it is located in " + json.formatted_address + " and it's currently " + json.opening_hours + "and the it's rating is" + json.rating;
         return res.json({
           speech: msg,
           displayText: msg,
