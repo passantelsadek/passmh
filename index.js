@@ -209,15 +209,12 @@ function processReply(event) {
         delay(function(){
          if(response.result.resolvedQuery.includes("capital") || response.result.resolvedQuery.includes("weather") || 
            response.result.resolvedQuery.includes("country")){
-          sendQuickReply(senderId);
+          //sendQuickReply(senderId);
+           searchByName("pyramids of giza egypt");
         } else {
           sendTextMessage(senderId, "What else would you like to know?");
         }
 }, 6000 );
-        
-       if(response.result.resolvedQuery.includes("Pyramids")){
-         searchByName("The Pyramids of Gize Egypt");
-       }
        
    }
       
