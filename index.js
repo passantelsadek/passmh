@@ -82,7 +82,7 @@ app.post("/webhook", function (req, res) {
     })
   } else if(req.body.result.action === 'place'){
     console.log('** PLACE **');
-    let places = req.body.result.parameters['place-attraction-gb'];
+    let places = req.body.result.parameters['place-attraction'];
     let restUrl = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM&input=" + places;
      request.get(restUrl, (err, response, body) => {
       if (!err && response.statusCode == 200) {
