@@ -464,8 +464,8 @@ var options = {
 // Start the request
  request.get(options, (err, response, body) => {
       if (!err && response.statusCode == 200) {
-        let json = JSON.parse(body);
-        console.log(json);
+        //let json = JSON.parse(body);
+        console.log(body);
         
       } else {
         let errorMessage = 'I failed to look up the city name.';
