@@ -216,8 +216,8 @@ function processReply(event) {
        
    }
    
-   if(response.result.resolvedQuery === "places to visit in cairo"){
-     textSearch("Places to visit in cairo");
+   if(response.result.resolvedQuery === "restaurants in nasr city"){
+     textSearch("restaurants in nasr city");
    }
       
         if (module === require.main) {
