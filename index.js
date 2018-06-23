@@ -454,7 +454,6 @@ function SearchbyName(input) {
 function textSearch(query){
 var options = {
   url:"https://maps.googleapis.com/maps/api/place/textsearch/json?",
-  method: 'GET',
   json: true,
   qs: {
     key: "AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM",
@@ -463,10 +462,21 @@ var options = {
   }
 };
 // Start the request
-request(options, function (error, response, body) {
-  var json = JSON.parse(body);
-  console.log(json);
-});
+ request.get(options, (err, response, body) => {
+      if (!err && response.statusCode == 200) {
+        let json = JSON.parse(body);
+        console.log(json);
+        
+      } else {
+        let errorMessage = 'I failed to look up the city name.';
+        return res.status(400).json({
+          status: {
+            code: 400,
+            errorType: errorMessage
+          }
+        });
+      }
+    })
 }
 
 
