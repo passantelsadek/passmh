@@ -453,8 +453,9 @@ function SearchbyName(input) {
  
 function textSearch(query){
 var options = {
-  url:"https://maps.googleapis.com/maps/api/place/textsearch/",
+  url:"https://maps.googleapis.com/maps/api/place/textsearch/json?",
   method: 'GET',
+  json: true,
   qs: {
     key: "AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM",
     query: query,
