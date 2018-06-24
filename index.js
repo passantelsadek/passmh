@@ -94,17 +94,31 @@ app.post("/webhook", function (req, res) {
  request.get(options, (err, response, body) => {
       if (!err && response.statusCode == 200) {
        console.log("BANNNETTTT");
-        for(var i =0 ; i<body.results.length ; i++){
-          let address = body.results[i].formatted_address;
-          let name = body.results[i].name;
-          let msg =  name + " and is located in " + address;
+        //for(var i =0 ; i<body.results.length ; i++){
+          let address0 = body.results[0].formatted_address;
+          let name0 = body.results[0].name;
+          let msg0 =  name0 + " and is located in " + address0;
+        
+        let address1 = body.results[1].formatted_address;
+          let name1 = body.results[1].name;
+          let msg1 =  name1 + " and is located in " + address1;
+        
+        let address2 = body.results[2].formatted_address;
+          let name2 = body.results[2].name;
+          let msg2 =  name2 + " and is located in " + address2;
+        
+        let address3 = body.results[3].formatted_address;
+          let name3 = body.results[3].name;
+          let msg3 =  name3 + " and is located in " + address3;
+         
+        let msg = msg0 + " " + msg1 + " " + msg2 + " " + msg3; 
            return res.json({
           speech: msg,
           displayText: msg,
           source: 'textSearch'
         });
           console.log(msg);
-        }
+        //}
         
       } else {
         let errorMessage = 'I failed.';
