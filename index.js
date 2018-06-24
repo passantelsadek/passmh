@@ -101,8 +101,9 @@ app.post("/webhook", function (req, res) {
            return res.json({
           speech: msg,
           displayText: msg,
-          source: 'testSearch'
+          source: 'textSearch'
         });
+          console.log(msg);
         }
         
       } else {
