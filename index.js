@@ -93,17 +93,17 @@ app.post("/webhook", function (req, res) {
 // Start the request
  request.get(options, (err, response, body) => {
       if (!err && response.statusCode == 200) {
-       console.log(body);
-        //for(var i =0; i< body.results;i++){
-          let address = body.results[0].formatted_address;
-          let name = body.results[0].name;
-          let msg = "The Place is " + name + "and is located in" + address;
+       console.log("BANNNETTTT");
+        for(var i =0 ; i<body.results.length ; i++){
+          let address = body.results[i].formatted_address;
+          let name = body.results[i].name;
+          let msg =  name + " and is located in " + address;
            return res.json({
           speech: msg,
           displayText: msg,
           source: 'testSearch'
         });
-        //}
+        }
         
       } else {
         let errorMessage = 'I failed.';
