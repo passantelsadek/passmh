@@ -111,7 +111,7 @@ app.post("/webhook", function (req, res) {
           let name3 = body.results[3].name;
           let msg3 =  name3 + " and is located in " + address3;
          
-        let msg = msg0 + " " + msg1 + " " + msg2 + " " + msg3; 
+        let msg = msg0 + " "  + " \n " + msg1 + " " + " \n " + msg2 + " " + " \n " +msg3; 
            return res.json({
           speech: msg,
           displayText: msg,
