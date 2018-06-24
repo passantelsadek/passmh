@@ -130,7 +130,39 @@ app.post("/webhook", function (req, res) {
         });
       }
     })
-  }        
+  }  else if (req.body.result.action === 'maps') {
+      var options = {
+  url:"https://www.google.com/maps/embed/v1/search?",
+  json: true,
+  qs: {
+    key: "AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM",
+    query: req.body.result.resolvedQuery,
+    language: "en"
+  }
+};
+// Start the request
+ request.get(options, (err, response, body) => {
+      if (!err && response.statusCode == 200) {
+       console.log("BANNNETTTT TANY"); 
+           return res.json({
+          speech: msg,
+          displayText: msg,
+          source: 'textSearch'
+        });
+          console.log(msg);
+        //}
+        
+      } else {
+        let errorMessage = 'I failed.';
+        return res.status(400).json({
+          status: {
+            code: 400,
+            errorType: errorMessage
+          }
+        });
+      }
+    })
+  }
 });
 
 // Adds support for GET requests to our webhook
@@ -197,11 +229,27 @@ function processHi(event) {
 
 function processReply(event) {
    if (!event.message.is_echo) {
+    var messageAttachments = event.message.attachments;
     var message = event.message.text;
     var senderId = event.sender.id;
 //  var payload = event.postback.payload;
      console.log("message recieved" + message);
 
+     if (messageAttachments) {
+            var lat = null;
+            var long = null;
+            if(messageAttachments[0].payload.coordinates)
+            {
+                lat = messageAttachments[0].payload.coordinates.lat;
+                long = messageAttachments[0].payload.coordinates.long;
+            }
+
+            var msg = "lat : " + lat + " ,long : " + long + "\n";
+
+            sendTextMessage(senderId, msg);
+
+        }
+ 
  let apiai = apiaiApp.textRequest(message, {
     sessionId: 'tabby_cat' // use any arbitrary id
   });
