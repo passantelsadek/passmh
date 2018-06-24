@@ -47,7 +47,7 @@ app.post("/webhook", function (req, res) {
   }
 });
 
-         app.post('/ai', (req, res) => {
+        app.post('/ai', (req, res) => {
   console.log('*** Webhook for api.ai query ***');
   console.log(req.body.result);
 
@@ -80,8 +80,42 @@ app.post("/webhook", function (req, res) {
         });
       }
     })
-  } 
-           
+  } else if(req.body.result.action === 'textSearch') {
+      var options = {
+  url:"https://maps.googleapis.com/maps/api/place/textsearch/json?",
+  json: true,
+  qs: {
+    key: "AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM",
+    query: req.body.result.resolvedQuery,
+    language: "en"
+  }
+};
+// Start the request
+ request.get(options, (err, response, body) => {
+      if (!err && response.statusCode == 200) {
+       console.log(body);
+        for(var i =0; i< body.results;i++){
+          let address = body.results[i].formatted_address;
+          let name = body.results[i].name;
+          let msg = "The Place is " + name + "and is located in" + address;
+           return res.json({
+          speech: msg,
+          displayText: msg,
+          source: 'testSearch'
+        });
+        }
+        
+      } else {
+        let errorMessage = 'I failed.';
+        return res.status(400).json({
+          status: {
+            code: 400,
+            errorType: errorMessage
+          }
+        });
+      }
+    })
+  }        
 });
 
 // Adds support for GET requests to our webhook
@@ -214,10 +248,6 @@ function processReply(event) {
         }
 }, 6000 );
        
-   }
-   
-   if(response.result.resolvedQuery === "restaurants in nasr city"){
-     textSearch("restaurants in nasr city");
    }
       
         if (module === require.main) {
@@ -464,8 +494,9 @@ var options = {
 // Start the request
  request.get(options, (err, response, body) => {
       if (!err && response.statusCode == 200) {
-        //let json = JSON.parse(body);
-        console.log(body);
+         for(var i =0;i<body.length;i++){
+           
+         }
         
       } else {
         let errorMessage = 'I failed to look up the city name.';
