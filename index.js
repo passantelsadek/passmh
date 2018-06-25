@@ -130,38 +130,6 @@ app.post("/webhook", function (req, res) {
         });
       }
     })
-  }  else if (req.body.result.action === 'maps') {
-      var options = {
-  url:"https://www.google.com/maps/embed/v1/search?",
-  json: true,
-  qs: {
-    key: "AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM",
-    query: req.body.result.resolvedQuery,
-    language: "en"
-  }
-};
-// Start the request
- request.get(options, (err, response, body) => {
-      if (!err && response.statusCode == 200) {
-       console.log("BANNNETTTT TANY"); 
-           return res.json({
-          speech: msg,
-          displayText: msg,
-          source: 'textSearch'
-        });
-          console.log(msg);
-        //}
-        
-      } else {
-        let errorMessage = 'I failed.';
-        return res.status(400).json({
-          status: {
-            code: 400,
-            errorType: errorMessage
-          }
-        });
-      }
-    })
   }
 });
 
@@ -303,8 +271,8 @@ function processReply(event) {
         sendTextMessage(senderId, JSON.stringify(res.data.items[1].link));         
         
         delay(function(){
-         if(response.result.resolvedQuery.includes("capital") || response.result.resolvedQuery.includes("weather") || 
-           response.result.resolvedQuery.includes("country")){
+         if(response.result.resolvedQuery.includes("what can i do today") || response.result.resolvedQuery.includes("where to go today?") || 
+           response.result.resolvedQuery.includes("places to go")){
           sendQuickReply(senderId);
         } else {
           sendTextMessage(senderId, "What else would you like to know?");
@@ -460,19 +428,25 @@ function sendTextMessage(recipientId, messageText) {
       quick_replies: [
         {
           "content_type":"text",
-          "title":"Weather",
+          "title":"Places to visit",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
         },
         {
           "content_type":"text",
-          "title":"Hotels",
+          "title":"Restaurants",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
         },
         {
           "content_type":"text",
-          "title":"Others",
+          "title":"Cinemas",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
-        }
+        },
+        {
+          "content_type":"text",
+          "title":"Other",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+        },
+        
       ]
     }
   }
