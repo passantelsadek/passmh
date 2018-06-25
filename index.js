@@ -83,11 +83,11 @@ app.post("/webhook", function (req, res) {
   } else if(req.body.result.action === 'textSearch') {
     let city1 = req.body.result.parameters['geo-city'];
       var options = {
-  url:"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + req.body.result.resolvedQuery + city1,
+  url:"https://maps.googleapis.com/maps/api/place/textsearch/json?",
   json: true,
   qs: {
     key: "AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM",
-    //query: req.body.result.resolvedQuery,
+    query: req.body.result.resolvedQuery,
     language: "en"
   }
 };
