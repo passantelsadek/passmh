@@ -83,7 +83,7 @@ app.post("/webhook", function (req, res) {
       }
     })
   } else if(req.body.result.action === 'textSearch') {
-    let city1 = req.body.result.parameters['geocity2'];
+    let city1 = req.body.result.parameters['geo-city2'];
     let place = req.body.result.parameters['Places'];
       var options = {
   url:"https://maps.googleapis.com/maps/api/place/textsearch/json?",
