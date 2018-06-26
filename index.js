@@ -13,6 +13,7 @@ const
   app = express().use(bodyParser.json());
 
 var statusCode = 0;
+
 var delay = ( function() {
     var timer = 0;
     return function(callback, ms) {
@@ -51,7 +52,7 @@ app.post("/webhook", function (req, res) {
         app.post('/ai', (req, res) => {
   console.log('*** Webhook for api.ai query ***');
   console.log(req.body.result);
-
+   var citya = "";
   if (req.body.result.action === 'weather') {
     console.log('** weather **');
     let city = req.body.result.parameters['geo-city'];
@@ -81,7 +82,7 @@ app.post("/webhook", function (req, res) {
         });
       }
     })
-  } else if(req.body.result.action === 'where - custom - custom') {
+  } else if(req.body.result.action === 'textSearch') {
     let city1 = req.body.result.parameters['geo-city'];
     let place = req.body.result.parameters['Places'];
       var options = {
@@ -89,7 +90,7 @@ app.post("/webhook", function (req, res) {
   json: true,
   qs: {
     key: "AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM",
-    query: place + " " + city1,
+    query: place + " " + citya,
     language: "en"
   }
         
@@ -134,6 +135,8 @@ app.post("/webhook", function (req, res) {
         });
       }
     })
+  }else if(req.body.result.action === 'where.where-custom'){
+     citya = req.body.result.parameters['geo-city'];
   }
 });
 
