@@ -12,7 +12,7 @@ const
   customsearch = google.customsearch('v1'),
   app = express().use(bodyParser.json());
 
-
+var statusCode = 0;
 var delay = ( function() {
     var timer = 0;
     return function(callback, ms) {
@@ -88,7 +88,7 @@ app.post("/webhook", function (req, res) {
   json: true,
   qs: {
     key: "AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM",
-    query: req.body.result.resolvedQuery + " " + "in cairo",
+    query: req.body.result.resolvedQuery,
     language: "en"
   }
 };
@@ -315,6 +315,8 @@ function processReply(event) {
 
 }
 }
+
+
 
 function sendButtonMessage(recipientId) {
   var messageData = {
