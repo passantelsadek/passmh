@@ -202,8 +202,9 @@ function processReply(event) {
     var message = event.message.text;
     var senderId = event.sender.id;
 //  var payload = event.postback.payload;
+    var statusCode = 0;
      console.log("message recieved" + message);
-
+     
      if (messageAttachments) {
             var lat = null;
             var long = null;
@@ -214,9 +215,13 @@ function processReply(event) {
             }
 
             var msg = "lat : " + lat + " ,long : " + long + "\n";
-
+             
             sendTextMessage(senderId, msg);
-
+            if(statusCode == 0){
+              var response1= msg;
+              statusCode++;
+              console.log("status code is equal to " + statusCode + response1);
+            }
         }
  
  let apiai = apiaiApp.textRequest(message, {
