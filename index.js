@@ -37,12 +37,8 @@ app.post("/webhook", function (req, res) {
      body.entry.forEach(function(entry) {
       let webhook_event = entry.messaging[0];
       //console.log("GOT:" + webhook_event.message.text);  
-       var statusCode=0;
-       var resp0 = "";
-       var resp1 = "";
        // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
-
         processReply(event);
       });
     });
