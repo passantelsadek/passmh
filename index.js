@@ -81,7 +81,7 @@ app.post("/webhook", function (req, res) {
         });
       }
     })
-  } else if(req.body.result.action === 'textSearch') {
+  } else if(req.body.result.action === 'where - custom - custom') {
     let city1 = req.body.result.parameters['geo-city'];
     let place = req.body.result.parameters['Places'];
       var options = {
@@ -92,6 +92,7 @@ app.post("/webhook", function (req, res) {
     query: place + " " + city1,
     language: "en"
   }
+        
 };
 // Start the request
  request.get(options, (err, response, body) => {
