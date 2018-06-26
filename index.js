@@ -43,7 +43,7 @@ app.post("/webhook", function (req, res) {
        // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
         for(statusCode=0;statusCode<3;statusCode++){
-          if(statusCode = 0){
+          if(statusCode == 0){
             sendTextMessage(event.sender.id, "Where are you today?, Please specify your city,country");
             statusCode++;
             resp0 == event.message.text;
@@ -160,7 +160,7 @@ app.post("/webhook", function (req, res) {
         else{
         processReply(event);
         }
-        }
+        
          }
       });
     });
