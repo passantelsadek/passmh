@@ -272,7 +272,8 @@ function processReply(event) {
         delay(function(){
          if(response.result.resolvedQuery.includes("what can i do today") || response.result.resolvedQuery.includes("where to go today?") || 
            response.result.resolvedQuery.includes("places to go")){
-          sendQuickReply(senderId);
+          //sendQuickReply(senderId);
+           sendButtonMessage(senderId);
         } else {
           sendTextMessage(senderId, "What else would you like to know?");
         }
@@ -499,53 +500,6 @@ function sendMessage(recipientId, message) {
   });
 }
 
-function SearchbyName(input) {
-    request({
-    url: "https://maps.googleapis.com/maps/api/place/findplacefromtext",
-    qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-    method: "GET",
-    json: {
-      input: input,
-      inputtype: "textquery",
-      fields: "photos,formatted_address,name,rating,opening_hours,geometry",
-      key: "AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM"
-    }
-  }, function(error, response, body) {
-    if (error) {
-      console.log("Error sending message: " + response.error);
-    }
-  });
-}
- 
-function textSearch(query){
-var options = {
-  url:"https://maps.googleapis.com/maps/api/place/textsearch/json?",
-  json: true,
-  qs: {
-    key: "AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM",
-    query: query,
-    language: "en"
-  }
-};
-// Start the request
- request.get(options, (err, response, body) => {
-      if (!err && response.statusCode == 200) {
-         for(var i =0;i<body.length;i++){
-           
-         }
-        
-      } else {
-        let errorMessage = 'I failed to look up the city name.';
-        return res.status(400).json({
-          status: {
-            code: 400,
-            errorType: errorMessage
-          }
-        });
-      }
-    })
-}
-
 
 function reply(event) {
   let sender = event.sender.id;
@@ -583,7 +537,70 @@ function reply(event) {
 
   apiai.end();
 }
+
            
+function receivedMessage(event) {
+  var senderID = event.sender.id;
+  var recipientID = event.recipient.id;
+  var timeOfMessage = event.timestamp;
+  var message = event.message;
+
+  console.log("Received message for user %d and page %d at %d with message:",
+    senderID, recipientID, timeOfMessage);
+  console.log(JSON.stringify(message));
+
+  var isEcho = message.is_echo;
+  var messageId = message.mid;
+  var appId = message.app_id;
+  var metadata = message.metadata;
+
+  // You may get a text or attachment but not both
+  var messageText = message.text;
+  var messageAttachments = message.attachments;
+  var quickReply = message.quick_reply;
+
+  if (isEcho) {
+    // Just logging message echoes to console
+    console.log("Received echo for message %s and app %d with metadata %s",
+      messageId, appId, metadata);
+    return;
+  } else if (quickReply) {
+    var quickReplyPayload = quickReply.payload;
+    console.log("Quick reply for message %s with payload %s",
+      messageId, quickReplyPayload);
+
+    sendTextMessage(senderID, "Quick reply tapped");
+    return;
+  }
+
+  if (messageText) {
+
+    // If we receive a text message, check to see if it matches any special
+    // keywords and send back the corresponding example. Otherwise, just echo
+    // the text we received.
+    switch (messageText.replace(/[^\w\s]/gi, '').trim().toLowerCase()) {
+      case 'hello':
+      case 'hi':
+        sendHiMessage(senderID);
+        break;
+
+      default:
+        sendTextMessage(senderID, messageText);
+    }
+  } else if (messageAttachments) {
+    sendTextMessage(senderID, "Message with attachment received");
+  }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 function isEmpty(obj) {
