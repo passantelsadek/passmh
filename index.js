@@ -87,7 +87,7 @@ app.post("/webhook", function (req, res) {
   json: true,
   qs: {
     key: "AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM",
-    query: req.body.result.resolvedQuery,
+    query: req.body.result.resolvedQuery + " " + "in cairo",
     language: "en"
   }
 };
