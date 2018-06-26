@@ -46,7 +46,7 @@ app.post("/webhook", function (req, res) {
           if(statusCode == 0){
             sendTextMessage(event.sender.id, "Where are you today?, Please specify your city,country");
             statusCode++;
-            resp0 == event.message.text;
+            //resp0 == event.message.text;
           }
           if(statusCode == 1){
             sendTextMessage(event.sender.id,"Would you to check..");
