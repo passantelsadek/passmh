@@ -12,6 +12,7 @@ const
   customsearch = google.customsearch('v1'),
   app = express().use(bodyParser.json());
 
+
 var delay = ( function() {
     var timer = 0;
     return function(callback, ms) {
@@ -36,10 +37,130 @@ app.post("/webhook", function (req, res) {
      body.entry.forEach(function(entry) {
       let webhook_event = entry.messaging[0];
       //console.log("GOT:" + webhook_event.message.text);  
-       
+       var statusCode=0;
+       var resp0 = "";
+       var resp1 = "";
        // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
+        for(statusCode=0;statusCode<3;statusCode++){
+          if(statusCode = 0){
+            sendTextMessage(event.sender.id, "Where are you today?, Please specify your city,country");
+            statusCode++;
+            resp0 == event.message.text;
+          }
+          if(statusCode == 1){
+            sendTextMessage(event.sender.id,"Would you to check..");
+            delay(function(){
+              sendQuickReply(event.sender.id);
+            }, 6000 );
+            statusCode++;
+            resp1 = event.message.text;
+          }
+          if(statusCode == 2){
+            
+             app.post('/ai', (req, res) => {
+  console.log('*** Webhook for api.ai query ***');
+  console.log(req.body.result);
+
+  if (req.body.result.action === 'weather') {
+    console.log('** weather **');
+    let city = req.body.result.parameters['geo-city'];
+    let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID=c355d6fe8ab3abe2d69f499a6f5147f4&q=' +city;
+    //console.log("the url is:" + restUrl)
+
+    request.get(restUrl, (err, response, body) => {
+      if (!err && response.statusCode == 200) {
+        let json = JSON.parse(body);
+        console.log(json);
+        let tempF = ~~(json.main.temp * 9/5 - 459.67);
+        let tempC = ~~(json.main.temp - 273.15);
+        let msg = "The current condition in " + json.name + " is " + json.weather[0].description + " and the temperature is " + tempF + " ℉ (" +tempC+ " ℃)."
+        return res.json({
+          speech: msg,
+          displayText: msg,
+          source: 'weather'
+        });
+        
+      } else {
+        let errorMessage = 'I failed to look up the city name.';
+        return res.status(400).json({
+          status: {
+            code: 400,
+            errorType: errorMessage
+    }
+        });
+      }
+    })
+  } else if(req.body.result.action === 'textSearch') {
+      var options = {
+  url:"https://maps.googleapis.com/maps/api/place/textsearch/json?",
+  json: true,
+  qs: {
+    key: "AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM",
+    query: resp1 + "in" + resp0 ,
+    language: "en"
+  }
+};
+// Start the request
+ request.get(options, (err, response, body) => {
+      if (!err && response.statusCode == 200) {
+       console.log("BANNNETTTT");
+        //for(var i =0 ; i<body.results.length ; i++){
+          let address0 = body.results[0].formatted_address;
+          let name0 = body.results[0].name;
+          let msg0 =  name0 + " and is located in " + address0;
+        
+        let address1 = body.results[1].formatted_address;
+          let name1 = body.results[1].name;
+          let msg1 =  name1 + " and is located in " + address1;
+        
+        let address2 = body.results[2].formatted_address;
+          let name2 = body.results[2].name;
+          let msg2 =  name2 + " and is located in " + address2;
+        
+        let address3 = body.results[3].formatted_address;
+          let name3 = body.results[3].name;
+          let msg3 =  name3 + " and is located in " + address3;
+         
+        let msg = msg0 + " "  + " \n " + msg1 + " " + " \n " + msg2 + " " + " \n " +msg3; 
+           return res.json({
+          speech: msg,
+          displayText: msg,
+          source: 'textSearch'
+        });
+          console.log(msg);
+        //}
+        
+      } else {
+        let errorMessage = 'I failed.';
+        return res.status(400).json({
+          status: {
+            code: 400,
+            errorType: errorMessage
+          }
+        });
+      }
+    })
+  }
+});
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          }
+          }
+          
+          
+          
+        else{
         processReply(event);
+        }
+        }
       });
     });
 
@@ -194,15 +315,12 @@ function processHi(event) {
     });
   }
 
-
-
 function processReply(event) {
    if (!event.message.is_echo) {
     var messageAttachments = event.message.attachments;
     var message = event.message.text;
     var senderId = event.sender.id;
 //  var payload = event.postback.payload;
-    var statusCode = 0;
      console.log("message recieved" + message);
      
      if (messageAttachments) {
@@ -217,11 +335,6 @@ function processReply(event) {
             var msg = "lat : " + lat + " ,long : " + long + "\n";
              
             sendTextMessage(senderId, msg);
-            if(statusCode == 0){
-              var response1= msg;
-              statusCode++;
-              console.log("status code is equal to " + statusCode + response1);
-            }
         }
  
  let apiai = apiaiApp.textRequest(message, {
