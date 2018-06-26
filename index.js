@@ -44,9 +44,6 @@ app.post("/webhook", function (req, res) {
       entry.messaging.forEach(function(event) {
 
         processReply(event);
-        }
-        
-         }
       });
     });
 
