@@ -27,24 +27,17 @@ app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
 // Creates the endpoint for our webhook 
 
-app.post("/webhook", function (req, res) {
-  
-  let body = req.body;
-  // Make sure this is a page subscription
-  if (body.object == "page") {
-    // Iterate over each entry
-    // There may be multiple entries if batched
-     body.entry.forEach(function(entry) {
-      let webhook_event = entry.messaging[0];
-      //console.log("GOT:" + webhook_event.message.text);  
-       
-       // Iterate over each messaging event
-      entry.messaging.forEach(function(event) {
-       // processReply(event);
+app.post('/webhook', (req, res) => {
+  console.log(req.body);
+  if (req.body.object === 'page') {
+    req.body.entry.forEach((entry) => {
+      entry.messaging.forEach((event) => {
+        if (event.message && event.message.text) {
+          sendMessage(event);
+        }
       });
     });
-
-    res.sendStatus(200);
+    res.status(200).end();
   }
 });
 
