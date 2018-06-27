@@ -136,6 +136,60 @@ app.post("/webhook", function (req, res) {
         });
       }
     })
+  }else if(req.body.result.action === 'textSearchh') {
+    let city1 = req.body.result.parameters['geo-city'];
+    let place = req.body.result.parameters['Places'];
+      var options = {
+  url:"https://maps.googleapis.com/maps/api/place/textsearch/json?",
+  json: true,
+  qs: {
+    key: "AIzaSyAvP3eFRnZQJppz9-1bdLmeoCTPfHgbHjM",
+    query: req.body.result.resolvedQuery + "\n" + "\n" + "Press on the underlined Location to direct you to Google Maps.",
+    language: "en"
+  }
+        
+};
+// Start the request
+ request.get(options, (err, response, body) => {
+      if (!err && response.statusCode == 200) {
+       console.log("BANNNETTTT");
+        
+          let address0 = body.results[0].formatted_address;
+          let name0 = body.results[0].name;
+          let msg0 =  name0 + " and is located in " + address0;
+        
+        let address1 = body.results[1].formatted_address;
+          let name1 = body.results[1].name;
+          let msg1 =  name1 + " and is located in " + address1;
+        
+        let address2 = body.results[2].formatted_address;
+          let name2 = body.results[2].name;
+          let msg2 =  name2 + " and is located in " + address2;
+        
+        let address3 = body.results[3].formatted_address;
+          let name3 = body.results[3].name;
+          let msg3 =  name3 + " and is located in " + address3;
+         
+        let msg = msg0 + " "  + " \n " + msg1 + " " + " \n " + msg2 + " " + " \n " +msg3; 
+           return res.json({
+          speech: msg + "\n" + "\n" + "Press on the underlined Location to direct you to Google Maps.",
+          displayText: msg,
+          source: 'textSearch'
+        });
+          console.log(msg);
+         
+           
+        
+      } else {
+        let errorMessage = 'I failed.';
+        return res.status(400).json({
+          status: {
+            code: 400,
+            errorType: errorMessage
+          }
+        });
+      }
+    })
   }
 });
 
