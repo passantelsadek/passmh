@@ -52,7 +52,7 @@ app.post("/webhook", function (req, res) {
         app.post('/ai', (req, res) => {
   console.log('*** Webhook for api.ai query ***');
   console.log(req.body.result);
-   var citya = "";
+ 
   if (req.body.result.action === 'weather') {
     console.log('** weather **');
     let city = req.body.result.parameters['geo-city'];
@@ -123,7 +123,8 @@ app.post("/webhook", function (req, res) {
           source: 'textSearch'
         });
           console.log(msg);
-        //}
+          
+           
         
       } else {
         let errorMessage = 'I failed.';
