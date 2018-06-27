@@ -99,7 +99,7 @@ app.post("/webhook", function (req, res) {
  request.get(options, (err, response, body) => {
       if (!err && response.statusCode == 200) {
        console.log("BANNNETTTT");
-        //for(var i =0 ; i<body.results.length ; i++){
+        
           let address0 = body.results[0].formatted_address;
           let name0 = body.results[0].name;
           let msg0 =  name0 + " and is located in " + address0;
@@ -123,7 +123,7 @@ app.post("/webhook", function (req, res) {
           source: 'textSearch'
         });
           console.log(msg);
-          
+          sendTextMessage(body.id,"Already visited? Want another options?");
            
         
       } else {
@@ -599,13 +599,6 @@ function receivedMessage(event) {
     sendTextMessage(senderID, "Message with attachment received");
   }
 }
-
-
-
-
-
-
-
 
 
 
