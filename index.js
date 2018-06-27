@@ -123,7 +123,7 @@ app.post("/webhook", function (req, res) {
           source: 'textSearch'
         });
           console.log(msg);
-          sendTextMessage(body.id,"Already visited? Want another options?");
+         
            
         
       } else {
@@ -136,8 +136,6 @@ app.post("/webhook", function (req, res) {
         });
       }
     })
-  }else if(req.body.result.action === 'where.where-custom'){
-     citya = req.body.result.parameters['geo-city'];
   }
 });
 
@@ -276,13 +274,7 @@ function processReply(event) {
         sendTextMessage(senderId, JSON.stringify(res.data.items[1].link));         
         
         delay(function(){
-         if(response.result.resolvedQuery.includes("what can i do today") || response.result.resolvedQuery.includes("where to go today?") || 
-           response.result.resolvedQuery.includes("places to go")){
-          //sendQuickReply(senderId);
-           sendButtonMessage(senderId);
-        } else {
           sendTextMessage(senderId, "What else would you like to know?");
-        }
 }, 6000 );
        
    }
