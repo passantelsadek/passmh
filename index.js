@@ -118,7 +118,7 @@ app.post("/webhook", function (req, res) {
          
         let msg = msg0 + " "  + " \n " + msg1 + " " + " \n " + msg2 + " " + " \n " +msg3; 
            return res.json({
-          speech: msg,
+          speech: msg + "\n" + "\n" + "Press on the underlined Location to direct you to Google Maps.",
           displayText: msg,
           source: 'textSearch'
         });
